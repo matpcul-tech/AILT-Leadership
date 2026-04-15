@@ -865,6 +865,29 @@ export default function AILTSite() {
   const [scrolled, setScrolled] = useState(false);
   const [contact, setContact] = useState({ name: "", email: "", msg: "" });
   const [contactSent, setContactSent] = useState(false);
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactError, setContactError] = useState("");
+
+  const submitContact = async () => {
+    if (!contact.name || !contact.email || !contact.msg) return;
+    setContactLoading(true);
+    setContactError("");
+    try {
+      const res = await fetch("https://formspree.io/f/xpqkwnlk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ name: contact.name, email: contact.email, message: contact.msg }),
+      });
+      if (res.ok) {
+        setContactSent(true);
+      } else {
+        setContactError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setContactError("Could not connect. Please try again.");
+    }
+    setContactLoading(false);
+  };
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -1080,17 +1103,18 @@ export default function AILTSite() {
                   <div style={{ fontSize: 40, marginBottom: 12 }}>✓</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: G, fontFamily: "'Cormorant Garamond',serif", marginBottom: 8 }}>Message Sent</div>
                   <div style={{ fontSize: 14, color: T }}>Thank you for reaching out. Matthew will be in touch shortly.</div>
-                  <button onClick={() => { setContactSent(false); setContact({name:"",email:"",msg:""}); }} style={{ marginTop: 20, padding: "10px 20px", background: D3, border: `1px solid ${D3}`, borderRadius: 8, color: T, cursor: "pointer", fontSize: 13 }}>Send Another</button>
+                  <button onClick={() => { setContactSent(false); setContact({name:"",email:"",msg:""}); setContactError(""); }} style={{ marginTop: 20, padding: "10px 20px", background: D3, border: `1px solid ${D3}`, borderRadius: 8, color: T, cursor: "pointer", fontSize: 13 }}>Send Another</button>
                 </div>
               ) : (
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   <input value={contact.name} onChange={e=>setContact(f=>({...f,name:e.target.value}))} placeholder="Your name" style={IS} />
                   <input value={contact.email} onChange={e=>setContact(f=>({...f,email:e.target.value}))} placeholder="Email address" style={IS} />
                   <textarea value={contact.msg} onChange={e=>setContact(f=>({...f,msg:e.target.value}))} placeholder="How can I help?" rows={5} style={{ ...IS, resize: "none" }} />
-                  <button onClick={() => { if(contact.name&&contact.email&&contact.msg) setContactSent(true); }}
-                    disabled={!contact.name||!contact.email||!contact.msg}
-                    style={{ background: contact.name&&contact.email&&contact.msg?`linear-gradient(135deg,${G},#a88a28)`:D3, color: contact.name&&contact.email&&contact.msg?D:T, border: "none", padding: "14px 28px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: contact.name&&contact.email&&contact.msg?"pointer":"not-allowed", alignSelf: "flex-start" }}>
-                    Send Message
+                  {contactError && <div style={{ fontSize: 12, color: "#f87171", padding: "8px 12px", background: "#f871711a", borderRadius: 6, border: "1px solid #f8717130" }}>{contactError}</div>}
+                  <button onClick={submitContact}
+                    disabled={!contact.name||!contact.email||!contact.msg||contactLoading}
+                    style={{ background: contact.name&&contact.email&&contact.msg&&!contactLoading?`linear-gradient(135deg,${G},#a88a28)`:D3, color: contact.name&&contact.email&&contact.msg&&!contactLoading?D:T, border: "none", padding: "14px 28px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: contact.name&&contact.email&&contact.msg&&!contactLoading?"pointer":"not-allowed", alignSelf: "flex-start" }}>
+                    {contactLoading ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               )}
