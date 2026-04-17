@@ -906,6 +906,7 @@ export default function AILTSite() {
             {["theory","evidence","book","tools","course","about","contact"].map(n => (
               <button key={n} onClick={() => go(n)} style={{ background: "none", border: "none", color: T, fontSize: 12, fontWeight: 600, padding: "8px 10px", cursor: "pointer", textTransform: "capitalize" }}>{n}</button>
             ))}
+            <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ background:`linear-gradient(135deg,${G},#a88a28)`, color: D, padding: "8px 18px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none", marginLeft: 8 }}>Buy Book →</a>
           </div>
         </div>
       </nav>
@@ -983,7 +984,27 @@ export default function AILTSite() {
             <SectionTitle tag="The Book" title="Leadership for the Age of AI" sub="73,000 words of theory, evidence, case studies, and practical application." />
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
               <FI><div style={{ background: `linear-gradient(135deg,${D2},${D3})`, border: `1px solid ${G}20`, borderRadius: 16, padding: 40, textAlign: "center" }}>
-                <div style={{ fontSize: 80, marginBottom: 16 }}>📖</div>
+                <div style={{ background:"linear-gradient(160deg,#07090d 0%,#151b26 60%,#0c1018 100%)", border:"1px solid #c8a43430", borderRadius:16, padding:"40px 32px", textAlign:"center", position:"relative", overflow:"hidden", boxShadow:"0 24px 80px rgba(0,0,0,0.6)" }}>
+                  <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:"linear-gradient(90deg,#c8a434,#8b6914)" }} />
+                  <div style={{ fontSize:10, fontWeight:700, letterSpacing:4, color:"#c8a434", textTransform:"uppercase", marginBottom:20 }}>Adaptive Inclusive Leadership Theory</div>
+                  <div style={{ width:60, height:60, margin:"0 auto 20px", position:"relative" }}>
+                    <svg viewBox="0 0 60 60" style={{width:60,height:60}}>
+                      <circle cx="30" cy="30" r="28" fill="none" stroke="#c8a43420" strokeWidth="1"/>
+                      <circle cx="30" cy="30" r="20" fill="none" stroke="#c8a43430" strokeWidth="1"/>
+                      <polygon points="30,8 50,42 10,42" fill="none" stroke="#c8a434" strokeWidth="1.5" opacity="0.6"/>
+                      <circle cx="30" cy="8" r="3" fill="#c8a434"/>
+                      <circle cx="50" cy="42" r="3" fill="#c8a434"/>
+                      <circle cx="10" cy="42" r="3" fill="#c8a434"/>
+                      <circle cx="30" cy="30" r="4" fill="#c8a434" opacity="0.8"/>
+                    </svg>
+                  </div>
+                  <div style={{ fontSize:28, fontWeight:300, color:"#e4ddd0", fontFamily:"'Cormorant Garamond',serif", lineHeight:1.2, marginBottom:6 }}>Leadership for the<br/><span style={{fontWeight:700, fontStyle:"italic"}}>Age of AI</span></div>
+                  <div style={{ width:40, height:1, background:"#c8a434", margin:"16px auto" }} />
+                  <div style={{ fontSize:11, letterSpacing:3, color:"#c8a43490", textTransform:"uppercase", marginBottom:20 }}>Governance · Equity · Adaptation</div>
+                  <div style={{ fontSize:13, fontWeight:600, color:"#c8a434", letterSpacing:2, textTransform:"uppercase" }}>Matthew Culwell</div>
+                  <div style={{ fontSize:11, color:"#9ca3b4", marginTop:4 }}>Doctoral Researcher · Sovereign Shield Technologies</div>
+                  <div style={{ position:"absolute", bottom:0, left:0, right:0, height:3, background:"linear-gradient(90deg,#c8a434,#8b6914)" }} />
+                </div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif", marginBottom: 4 }}>Adaptive Inclusive<br />Leadership Theory</div>
                 <div style={{ fontSize: 13, color: G, fontStyle: "italic" }}>by Matthew Culwell</div>
               </div></FI>
