@@ -2,11 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import { MODULES } from "./curriculum.js";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
-const KEY = "ailt-program-v1";
+const KEY = "ailt-program-v2";
+
+function empty() { return { done: {}, notes: {}, picks: {}, chapters: {}, pages: {} }; }
 
 function load() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || { done: {}, notes: {}, picks: {} }; }
-  catch { return { done: {}, notes: {}, picks: {} }; }
+  try {
+    const raw = JSON.parse(localStorage.getItem(KEY)) || empty();
+    return { ...empty(), ...raw, chapters: raw.chapters || {}, pages: raw.pages || {} };
+  } catch { return empty(); }
 }
 
 export function Program({ onBack }) {
@@ -15,6 +19,8 @@ export function Program({ onBack }) {
   const [lesId, setLesId] = useState(MODULES[0].lessons[0].id);
   const [pick, setPick] = useState(null);
   const [note, setNote] = useState("");
+  const [chapter, setChapter] = useState("");
+  const [page, setPage] = useState("");
   const [msg, setMsg] = useState("");
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify(store)); }, [store]);
@@ -26,6 +32,8 @@ export function Program({ onBack }) {
 
   useEffect(() => {
     setNote(store.notes[les.id] || "");
+    setChapter(store.chapters[les.id] || "");
+    setPage(store.pages[les.id] || "");
     setPick(store.picks[les.id] ?? null);
     setMsg("");
   }, [les.id]);
@@ -34,11 +42,23 @@ export function Program({ onBack }) {
 
   const save = () => {
     const text = note.trim();
-    if (text.length < 24) { setMsg("Write a little more. A plan you can use is longer than a slogan."); return; }
+    const title = chapter.trim();
+    const pg = page.trim();
+    if (title.length < 8) { setMsg("Enter the chapter title as it is printed in the book."); return; }
+    if (!/^\d{1,4}$/.test(pg) || Number(pg) < 1) { setMsg("Enter the page number from your copy of the book."); return; }
+    if (text.length < 200) { setMsg("The journal has to use the book. Restate the passage and what you understand now. A sentence is not an entry."); return; }
+    if (les.teach.some(p => p.length > 80 && text.includes(p.slice(0, 80)))) { setMsg("That is this screen, not the book. Write from the page you read."); return; }
     if (pick !== les.check.answer) { setMsg("Check the question again. The point is the distinction, not the wording."); return; }
-    const next = { ...store, notes: { ...store.notes, [les.id]: text }, picks: { ...store.picks, [les.id]: pick }, done: { ...store.done, [les.id]: true } };
+    const next = {
+      ...store,
+      notes: { ...store.notes, [les.id]: text },
+      chapters: { ...store.chapters, [les.id]: title },
+      pages: { ...store.pages, [les.id]: pg },
+      picks: { ...store.picks, [les.id]: pick },
+      done: { ...store.done, [les.id]: true }
+    };
     setStore(next);
-    setMsg("Saved. This week counts.");
+    setMsg("Saved. This journal counts.");
     const i = all.findIndex(l => l.id === les.id);
     const nxt = all[i + 1];
     if (nxt) {
@@ -86,14 +106,26 @@ export function Program({ onBack }) {
             <div style={{ fontSize: 12, color: G, letterSpacing: 1, fontWeight: 700 }}>{mod.construct} · {les.minutes} MIN · WEEK {les.week}</div>
             <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 500, fontSize: 40, lineHeight: 1.1, margin: "8px 0 12px" }}>{les.title}</h1>
             <p style={{ color: T, lineHeight: 1.6, marginBottom: 22 }}>{les.aim}</p>
+            <div style={{ border: `1px solid ${G}`, background: D2, borderRadius: 12, padding: 16, marginBottom: 22 }}>
+              <div style={{ fontSize: 11, letterSpacing: 2, color: G, fontWeight: 700 }}>READ THIS FIRST</div>
+              <p style={{ lineHeight: 1.6, marginTop: 8 }}>{les.reading}</p>
+              <a href="https://a.co/d/056JGgCx" target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 10, color: G, fontWeight: 700, fontSize: 14 }}>Leadership for the Age of AI</a>
+            </div>
+            <h2 style={h2}>What to watch for while you read</h2>
             {les.teach.map((p, i) => <p key={i} style={{ lineHeight: 1.7, marginBottom: 14, color: L }}>{p}</p>)}
             <h2 style={h2}>Practice before the next session</h2>
             <ol style={{ color: T, lineHeight: 1.6, paddingLeft: 18, marginBottom: 18 }}>
               {les.practice.map((s, i) => <li key={i} style={{ marginBottom: 6 }}>{s}</li>)}
             </ol>
-            <h2 style={h2}>Field note</h2>
+            <h2 style={h2}>Journal from the book</h2>
             <p style={{ color: T, fontSize: 14, marginBottom: 8 }}>{les.prompt}</p>
-            <textarea value={note} onChange={e => setNote(e.target.value)} rows={6} style={field} />
+            <label style={{ display: "block", color: T, fontSize: 13, marginBottom: 8 }}>Chapter title, as printed
+              <input value={chapter} onChange={e => setChapter(e.target.value)} style={{ ...field, marginTop: 6 }} />
+            </label>
+            <label style={{ display: "block", color: T, fontSize: 13, marginBottom: 8 }}>Page
+              <input value={page} onChange={e => setPage(e.target.value)} inputMode="numeric" style={{ ...field, marginTop: 6, maxWidth: 120 }} />
+            </label>
+            <textarea value={note} onChange={e => setNote(e.target.value)} rows={8} placeholder="The passage, in your own words, and what you understand now that you did not before." style={field} />
             <h2 style={h2}>Check</h2>
             <p style={{ marginBottom: 10 }}>{les.check.q}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -110,8 +142,13 @@ export function Program({ onBack }) {
             </div>
             {les.id === "6b" && plan.length > 0 && (
               <div style={{ marginTop: 28, padding: 18, border: `1px solid ${G}33`, borderRadius: 12, background: D2 }}>
-                <h2 style={{ ...h2, marginTop: 0 }}>What you have written</h2>
-                {plan.map((p, i) => <p key={i} style={{ color: T, fontSize: 14, lineHeight: 1.6, marginBottom: 8 }}>{p}</p>)}
+                <h2 style={{ ...h2, marginTop: 0 }}>Journal record</h2>
+                {all.map(l => store.notes[l.id] ? (
+                  <div key={l.id} style={{ marginBottom: 12 }}>
+                    <p style={{ color: L, fontSize: 14, fontWeight: 700 }}>{store.chapters[l.id]} · p. {store.pages[l.id]}</p>
+                    <p style={{ color: T, fontSize: 14, lineHeight: 1.6 }}>{store.notes[l.id]}</p>
+                  </div>
+                ) : null)}
               </div>
             )}
           </div>
