@@ -22,7 +22,7 @@ export const MODULES = [
           "Underline one sentence you would not have written the same way.",
           "Note which of the five predictions your organization is currently ignoring."
         ],
-        "prompt": "Retell the Amazon story in your own words and say what the chapter claims it is really about. Which of the five predictions changed how you see a system your organization already uses?",
+        "prompt": "Retell the opening of Chapter 1 in your own words and say what the chapter claims that story is really about. Which of the five predictions changed how you see a system your organization already uses?",
         "check": {
           "q": "Chapter 1’s premise is that adaptability and inclusivity are…",
           "options": [
@@ -49,7 +49,7 @@ export const MODULES = [
           "Write the technical part and the adaptive part of one live initiative.",
           "Name who has the learning the plan does not yet have."
         ],
-        "prompt": "How does Chapter 2 define adaptive capacity, and what does the March 2020 opening do that a definition alone would not? Apply the technical-versus-adaptive distinction to one initiative you are in.",
+        "prompt": "How does Chapter 2 define adaptive capacity, and what does the opening do that a definition alone would not? Apply the technical-versus-adaptive distinction to one initiative you are in.",
         "check": {
           "q": "In Chapter 2, adaptive capacity is the ability to…",
           "options": [
@@ -86,7 +86,7 @@ export const MODULES = [
           "Write who was missing from the last AI decision you know about.",
           "Show one sentence of the journal to the person you name below. Write what they asked."
         ],
-        "prompt": "What does Chapter 3 say the age-screening case proves that a values statement cannot? Name one system you would not want to defend with “we have a policy.”",
+        "prompt": "What does the opening case of Chapter 3 prove that a values statement cannot? Name one system you would not want to defend with “we have a policy.”",
         "check": {
           "q": "Chapter 3 treats inclusion, once an algorithm is screening people, as…",
           "options": [
@@ -102,7 +102,7 @@ export const MODULES = [
         "week": 4,
         "minutes": 60,
         "title": "When the Data Has an Opinion",
-        "aim": "Use Chapter 4’s hiring-committee scene. The ranking is not the decision.",
+        "aim": "Use Chapter 4’s opening scene. Say what the room did with the score.",
         "reading": "Read Chapter 4, “Making Decisions When the Data Has an Opinion,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 65. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening is a room with a short clock and a ranked list. Mark who the rank buries. Do not copy the book’s description onto this screen.",
@@ -113,7 +113,7 @@ export const MODULES = [
           "Write the question you would ask before anyone is cut.",
           "Name who has to be in that fifteen minutes."
         ],
-        "prompt": "Retell the Candidate Seven scene and the decision the book says most committees make. What would Chapter 4 require before your own team treats a score as a decision?",
+        "prompt": "Retell the opening of Chapter 4 and the decision the book says most rooms make. What would the chapter require before your own team treats a score as a decision?",
         "check": {
           "q": "Chapter 4 says a ranked AI list should be treated as…",
           "options": [
@@ -138,7 +138,7 @@ export const MODULES = [
         "week": 5,
         "minutes": 60,
         "title": "Humans and Machines Share the Work",
-        "aim": "Use the Room 412 scene. Trust in the model and trust in the organization are not the same thing.",
+        "aim": "Use Chapter 5’s opening. Name the two failures and what the third path requires.",
         "reading": "Read Chapter 5, “Communication When Humans and Machines Share the Work,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 87. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening puts a person between a model and what they can see. Mark the two failures the chapter names. Do not write them here.",
@@ -149,9 +149,9 @@ export const MODULES = [
           "Write what your organization does when a person contradicts a score.",
           "Draft the sentence you want someone to be able to say."
         ],
-        "prompt": "What are the two failures in the Room 412 opening, and what does the chapter say has to be true for a person to take the third path? Where would that sentence be punished in your organization?",
+        "prompt": "What are the two failures in the opening of Chapter 5, and what does the chapter say has to be true for a person to take the third path? Where would that sentence be punished in your organization?",
         "check": {
-          "q": "Chapter 5’s nurse scene is about…",
+          "q": "Chapter 5’s opening is about…",
           "options": [
             "Teaching clinicians to obey the alert",
             "The difference between trusting the model and trusting the organization enough to challenge it",
