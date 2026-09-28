@@ -4,7 +4,7 @@ export const MODULES = [
     "weeks": "1–2",
     "title": "When the algorithm decides",
     "construct": "Part One",
-    "summary": "The preface and the first two chapters. The book opens on Amazon’s résumé tool, then on what adaptive capacity actually is.",
+    "summary": "The preface and the first two chapters. What the book says adaptability is, and what it is not.",
     "lessons": [
       {
         "id": "1a",
@@ -14,8 +14,8 @@ export const MODULES = [
         "aim": "See why the book says adaptability and inclusivity fail when they are treated as separate skills.",
         "reading": "Read the Preface and Chapter 1, “When the Algorithm Decides,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 1. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "Stay with the Amazon résumé system and what it learned from a decade of mostly male résumés. The chapter’s claim is that the story is not about Amazon.",
-          "Mark the three capabilities, Inclusive Adaptive Capacity, Participatory Sensemaking, and Equity-Centered Flexibility, and the line that says psychological safety holds them together. Then mark the fourth prediction: inclusion deficits constrain adaptation more severely than the reverse."
+          "Do not let the opening company become the subject. Mark the sentence that says the story is not about that company.",
+          "Mark where the three capabilities are named, and the line about what holds them together. Then mark the prediction that says which failure is worse. The names belong in your journal, from the page."
         ],
         "practice": [
           "Read the preface question before Chapter 1.",
@@ -41,8 +41,8 @@ export const MODULES = [
         "aim": "Use Chapter 2’s account of adaptive capacity, not a slogan about being agile.",
         "reading": "Read Chapter 2, “The Adaptive Organization,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 21. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The chapter opens in March 2020. The difference it cares about is not size or industry. It is whether the organization could tell that the old response had stopped working.",
-          "Watch how the book separates a technical problem, where the expertise already exists, from an adaptive challenge, where people have to learn. AI rollouts are usually sold as the first and lived as the second."
+          "The opening is a date, not a definition. Mark what the organizations that coped were able to tell, and what the others could not.",
+          "Mark the distinction between a problem the existing expertise can already solve and a challenge that requires people to learn. Note which one a technology rollout is sold as, and which one it is lived as."
         ],
         "practice": [
           "Mark the sentence that defines adaptive capacity.",
@@ -77,13 +77,14 @@ export const MODULES = [
         "aim": "See how Chapter 3 separates a diversity statement from a system that was never examined by the people it sorts.",
         "reading": "Read Chapter 3, “Inclusion When the Algorithm Is Watching,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 43. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The opening is the EEOC matter: recruiting software that rejected women 55 and older and men 60 and older. More than two hundred people never reached a human reviewer.",
-          "The chapter’s point is that a non-discrimination policy does not govern a model. Inclusion here means the people the system can harm are in the evaluation before it goes live."
+          "The opening is a case in which software sorted people before a human saw them. Mark the sentence that says intent was not required.",
+          "Mark the difference the chapter draws between a written policy and an evaluation that includes the people the system can harm."
         ],
         "practice": [
           "Mark the sentence that says the algorithm did not need intent.",
           "Name one system in your organization that has a policy and no such review.",
-          "Write who was missing from the last AI decision you know about."
+          "Write who was missing from the last AI decision you know about.",
+          "Show one sentence of the journal to the person you name below. Write what they asked."
         ],
         "prompt": "What does Chapter 3 say the age-screening case proves that a values statement cannot? Name one system you would not want to defend with “we have a policy.”",
         "check": {
@@ -104,8 +105,8 @@ export const MODULES = [
         "aim": "Use Chapter 4’s hiring-committee scene. The ranking is not the decision.",
         "reading": "Read Chapter 4, “Making Decisions When the Data Has an Opinion,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 65. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The chapter opens with a committee, ten candidates, and fifteen minutes. Candidate Seven is a Black woman with a non-traditional path, ranked ninth. In most rooms the ranking stands.",
-          "Watch the move the book wants instead of “questioning the algorithm feels like questioning math.” Participatory sensemaking is the room interpreting the score, not obeying it."
+          "The opening is a room with a short clock and a ranked list. Mark who the rank buries. Do not copy the book’s description onto this screen.",
+          "Mark the move the book wants instead of treating a challenge to the score as a challenge to mathematics."
         ],
         "practice": [
           "Mark what the committee loses by accepting the rank.",
@@ -130,7 +131,7 @@ export const MODULES = [
     "weeks": "5–6",
     "title": "Voice, then the cases",
     "construct": "Part One into Part Two",
-    "summary": "Chapter 5 on the nurse and the alert. Chapter 6’s five organizations, read as evidence of how the theory behaves.",
+    "summary": "Chapter 5, on whether a person can contradict a model. Chapter 6’s five organizations, read as tests of how the theory behaves.",
     "lessons": [
       {
         "id": "3a",
@@ -140,8 +141,8 @@ export const MODULES = [
         "aim": "Use the Room 412 scene. Trust in the model and trust in the organization are not the same thing.",
         "reading": "Read Chapter 5, “Communication When Humans and Machines Share the Work,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 87. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "A nurse gets an alert: high probability of cardiac arrest. The patient is awake and complaining about the cafeteria. Blind trust is automation bias. Dismissal is algorithmic aversion.",
-          "The chapter’s third path is the one that depends on whether she can raise the conflict. Communication here is whether a person can say the model and the room disagree."
+          "The opening puts a person between a model and what they can see. Mark the two failures the chapter names. Do not write them here.",
+          "Mark what has to be true before someone can say the model and the room disagree."
         ],
         "practice": [
           "Mark the two failures the scene names.",
@@ -162,13 +163,13 @@ export const MODULES = [
       {
         "id": "3b",
         "week": 6,
-        "minutes": 75,
+        "minutes": 150,
         "title": "Five Cases",
         "aim": "Read the cases as tests of the theory, not as success stories.",
         "reading": "Read Chapter 6, “Case Studies of Adaptive Inclusive Leadership,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, including Synergistic Solutions, Global Dynamics, InnovateTech, GreenTech Solutions, and Community Connect. It begins on page 109. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The book says the five were chosen on purpose: a technology merger, pharmaceutical talent, an AI-era conflict, innovation in a hierarchy, and a nonprofit that had been deciding for its neighborhood.",
-          "Do not stop at the stories. The chapter closes on patterns: the inclusion-speed tradeoff, psychological safety as the turn, constructs that never work alone, structure rather than intent, and the need to keep recalibrating."
+          "Read the paragraph that says why these five organizations were chosen before you read the stories. The sectors are the point. The screen will not list them.",
+          "Do not stop at the stories. Mark the patterns the chapter names after the last case. The journal has to use one of those patterns from the page."
         ],
         "practice": [
           "Read all five, including the discussion after each.",
@@ -203,8 +204,8 @@ export const MODULES = [
         "aim": "Use Chapter 7 on yourself. The tool is not the point. The gap is.",
         "reading": "Read Chapter 7, “Practical Tools and Techniques,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, and begin Appendix A, the AILT assessment, which starts on page 325. Chapter 7 begins on page 133. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The chapter refuses a passive reading. It asks for self-assessment: strengths, the AI-specific questions about who designs and evaluates a system, and what you do with a recommendation you cannot explain.",
-          "Appendix A is the longer instrument. Use it as the book offers it, a diagnosis, not a score to post."
+          "The chapter refuses a passive reading. Mark the questions it asks you to answer about your own practice, including the ones about a system. Do not answer them from memory of this screen.",
+          "Appendix A is the longer instrument. Use it as a diagnosis. Mark the items you wanted to skip."
         ],
         "practice": [
           "Complete the self-assessment in the chapter.",
@@ -225,13 +226,13 @@ export const MODULES = [
       {
         "id": "4b",
         "week": 8,
-        "minutes": 80,
+        "minutes": 160,
         "title": "Method and Findings",
         "aim": "Read how the book builds the evidence, then what it claims each proposition can bear.",
         "reading": "Read Chapter 8, “Systematic Evidence Review: Methodology,” beginning on page 157, and Chapter 9, “Systematic Evidence Review: Findings,” beginning on page 175. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "Chapter 8 is explicit: AILT is not standing on one study. The review looks for convergence across meta-analyses and other programs. The preface already said the constructs have not yet been measured together in primary research.",
-          "Chapter 9 takes the five predictions one at a time, starting with the claim that inclusive and adaptive capacities constitute each other. Read the strength the book is willing to claim, not only the studies it likes."
+          "Chapter 8 says what this kind of review can prove and what it cannot. Mark both. The preface already warned about what has not yet been measured together.",
+          "Chapter 9 takes the predictions one at a time. Mark the one the book treats as thinnest. Do not carry a finding into a meeting until you have the page."
         ],
         "practice": [
           "Write what Chapter 8 says a systematic review can and cannot prove.",
@@ -266,8 +267,8 @@ export const MODULES = [
         "aim": "Leave Chapter 10 able to say both the pattern and the limit.",
         "reading": "Read Chapter 10, “Systematic Evidence Review: Discussion and Synthesis,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 199. This is the chapter the preface points to for the research agenda. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "The chapter’s claim is convergence: inclusive leadership, psychological safety, diversity and performance, shared leadership, and the AI cases point the same direction.",
-          "Read the limit as carefully as the claim. A young theory can be honest. Write down what Chapter 10 says still has to be measured, and what a leader is still responsible for before that measurement exists."
+          "Mark the sentence about what the studies converge on, and the sentence about the limit. Read the limit at least as carefully as the claim.",
+          "Write down what the chapter says still has to be measured, and what a leader is still responsible for before that measurement exists."
         ],
         "practice": [
           "Mark the sentence that says the pattern is too consistent to dismiss.",
@@ -288,13 +289,13 @@ export const MODULES = [
       {
         "id": "5b",
         "week": 10,
-        "minutes": 80,
+        "minutes": 160,
         "title": "Build It, and Be the Leader",
         "aim": "Chapters 11 and 12 move from the literature to the building and the person.",
         "reading": "Read Chapter 11, “Building It, From Theory to Organizational Practice,” beginning on page 221, and Chapter 12, “The Leader AILT Requires,” beginning on page 245. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "Chapter 11 starts with readiness: where the organization is, not where the values statement says it is. In the AI section, look for equity audits with the people affected in the room, and a place where any level can interpret a strange output.",
-          "Chapter 12 says this does not make you a data scientist. It asks whether you can ask what the system was trained on, who is missing, and what you will do when the answer is inconvenient. Self-awareness, including your own bias, is the start."
+          "In Chapter 11, mark how the book tells you to judge readiness, as opposed to the values statement. Mark who has to be in the room for an audit, and where a strange output can be interpreted.",
+          "In Chapter 12, mark the questions a leader must be able to ask of a model, and the line that says what this does not require you to become."
         ],
         "practice": [
           "Score your organization’s readiness in the book’s terms, not yours.",
@@ -324,13 +325,13 @@ export const MODULES = [
       {
         "id": "6a",
         "week": 11,
-        "minutes": 80,
+        "minutes": 160,
         "title": "Obstacles and Other Rooms",
         "aim": "Read the failure modes before you write a plan that assumes goodwill.",
         "reading": "Read Chapter 13, “What Will Go Wrong, And How to Navigate It,” beginning on page 267, and Chapter 14, “AILT Across Sectors and Cultures,” beginning on page 289. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
-          "Chapter 13 says the principles will meet resistance, some of it from places you do not expect. AI adds fear of displacement, distrust of the score, and fatigue at the pace. Bias is not removed by automating the decision. It is encoded.",
-          "Chapter 14 refuses one design for every room. A startup, a hospital triage model, a nonprofit, and a government agency do not carry the same risk. Read the sector closest to you, and one that is not."
+          "Chapter 13 names resistance, including kinds you will want to call something softer. Mark the one you have already heard. The screen will not list them.",
+          "Chapter 14 refuses one design for every room. Read the sector closest to you, and one that is not. Mark what has to change."
         ],
         "practice": [
           "List the resistance Chapter 13 names that you have already heard.",

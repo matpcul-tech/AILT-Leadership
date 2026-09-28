@@ -4,12 +4,12 @@ import { MODULES } from "./curriculum.js";
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
 const KEY = "ailt-program-v3";
 
-function empty() { return { done: {}, notes: {}, picks: {}, chapters: {}, pages: {} }; }
+function empty() { return { done: {}, notes: {}, picks: {}, chapters: {}, pages: {}, witnesses: {} }; }
 
 function load() {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY)) || empty();
-    return { ...empty(), ...raw, chapters: raw.chapters || {}, pages: raw.pages || {} };
+    return { ...empty(), ...raw, chapters: raw.chapters || {}, pages: raw.pages || {}, witnesses: raw.witnesses || {} };
   } catch { return empty(); }
 }
 
@@ -21,6 +21,7 @@ export function Program({ onBack }) {
   const [note, setNote] = useState("");
   const [chapter, setChapter] = useState("");
   const [page, setPage] = useState("");
+  const [witness, setWitness] = useState("");
   const [msg, setMsg] = useState("");
 
   useEffect(() => { localStorage.setItem(KEY, JSON.stringify(store)); }, [store]);
@@ -34,6 +35,7 @@ export function Program({ onBack }) {
     setNote(store.notes[les.id] || "");
     setChapter(store.chapters[les.id] || "");
     setPage(store.pages[les.id] || "");
+    setWitness(store.witnesses[les.id] || "");
     setPick(store.picks[les.id] ?? null);
     setMsg("");
   }, [les.id]);
@@ -44,8 +46,10 @@ export function Program({ onBack }) {
     const text = note.trim();
     const title = chapter.trim();
     const pg = page.trim();
+    const who = witness.trim();
     if (title.length < 8) { setMsg("Enter the chapter title as it is printed in the book."); return; }
     if (!/^\d{1,4}$/.test(pg) || Number(pg) < 1) { setMsg("Enter the page number from your copy of the book."); return; }
+    if (les.week >= 3 && who.length < 2) { setMsg("Name the person who will read one sentence of this entry. They have to be able to ask what the page said."); return; }
     if (text.length < 200) { setMsg("The journal has to use the book. Restate the passage and what you understand now. A sentence is not an entry."); return; }
     if (les.teach.some(p => p.length > 80 && text.includes(p.slice(0, 80)))) { setMsg("That is this screen, not the book. Write from the page you read."); return; }
     if (pick !== les.check.answer) { setMsg("Check the question again. The point is the distinction, not the wording."); return; }
@@ -54,6 +58,7 @@ export function Program({ onBack }) {
       notes: { ...store.notes, [les.id]: text },
       chapters: { ...store.chapters, [les.id]: title },
       pages: { ...store.pages, [les.id]: pg },
+      witnesses: { ...store.witnesses, [les.id]: les.week >= 3 ? who : "" },
       picks: { ...store.picks, [les.id]: pick },
       done: { ...store.done, [les.id]: true }
     };
@@ -103,7 +108,7 @@ export function Program({ onBack }) {
         </aside>
         <main style={{ overflowY: "auto", padding: "28px 32px 80px" }}>
           <div style={{ maxWidth: 720 }}>
-            <div style={{ fontSize: 12, color: G, letterSpacing: 1, fontWeight: 700 }}>{mod.construct} · {les.minutes} MIN · WEEK {les.week}</div>
+            <div style={{ fontSize: 12, color: G, letterSpacing: 1, fontWeight: 700 }}>{mod.construct} · {les.minutes} MIN WITH THE BOOK · WEEK {les.week}</div>
             <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 500, fontSize: 40, lineHeight: 1.1, margin: "8px 0 12px" }}>{les.title}</h1>
             <p style={{ color: T, lineHeight: 1.6, marginBottom: 22 }}>{les.aim}</p>
             <div style={{ border: `1px solid ${G}`, background: D2, borderRadius: 12, padding: 16, marginBottom: 22 }}>
@@ -125,6 +130,12 @@ export function Program({ onBack }) {
             <label style={{ display: "block", color: T, fontSize: 13, marginBottom: 8 }}>Page
               <input value={page} onChange={e => setPage(e.target.value)} inputMode="numeric" style={{ ...field, marginTop: 6, maxWidth: 120 }} />
             </label>
+            {les.week >= 3 && (
+              <label style={{ display: "block", color: T, fontSize: 13, marginBottom: 8 }}>Person who will read one sentence
+                <input value={witness} onChange={e => setWitness(e.target.value)} placeholder="A name, not a role" style={{ ...field, marginTop: 6 }} />
+                <span style={{ display: "block", marginTop: 6, fontSize: 12 }}>They do not have to agree. They have to be able to ask what the page said.</span>
+              </label>
+            )}
             <textarea value={note} onChange={e => setNote(e.target.value)} rows={8} placeholder="The passage, in your own words, and what you understand now that you did not before." style={field} />
             <h2 style={h2}>Check</h2>
             <p style={{ marginBottom: 10 }}>{les.check.q}</p>
@@ -145,7 +156,7 @@ export function Program({ onBack }) {
                 <h2 style={{ ...h2, marginTop: 0 }}>Journal record</h2>
                 {all.map(l => store.notes[l.id] ? (
                   <div key={l.id} style={{ marginBottom: 12 }}>
-                    <p style={{ color: L, fontSize: 14, fontWeight: 700 }}>{store.chapters[l.id]} · p. {store.pages[l.id]}</p>
+                    <p style={{ color: L, fontSize: 14, fontWeight: 700 }}>{store.chapters[l.id]} · p. {store.pages[l.id]}{store.witnesses[l.id] ? ` · shown to ${store.witnesses[l.id]}` : ""}</p>
                     <p style={{ color: T, fontSize: 14, lineHeight: 1.6 }}>{store.notes[l.id]}</p>
                   </div>
                 ) : null)}
