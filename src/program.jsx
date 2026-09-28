@@ -72,6 +72,27 @@ export function Program({ onBack }) {
     }
   };
 
+  const exportJournal = () => {
+    const now = new Date();
+    const stamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    const saved = all.filter(l => store.done[l.id] && store.notes[l.id]);
+    const lines = ["AILT Leadership Course, journal record", `Exported ${stamp}`, `${saved.length} of 12 weeks saved`, ""];
+    saved.forEach(l => {
+      lines.push(`Week ${l.week}: ${l.title}`);
+      lines.push(`${store.chapters[l.id] || ""}, p. ${store.pages[l.id] || ""}${store.witnesses[l.id] ? `, shown to ${store.witnesses[l.id]}` : ""}`);
+      lines.push(store.notes[l.id]);
+      lines.push("");
+    });
+    const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ailt-journal-${stamp}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   const plan = useMemo(() => all.map(l => store.notes[l.id]).filter(Boolean), [store, all]);
 
   return (
@@ -82,13 +103,17 @@ export function Program({ onBack }) {
           <div style={{ fontSize: 11, letterSpacing: 2, color: G, fontWeight: 700 }}>12-WEEK PROGRAM</div>
           <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 22 }}>AILT Leadership Course</div>
         </div>
-        <div style={{ fontSize: 13, color: T }}>{doneN}/{all.length} done</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {doneN > 0 && <button onClick={exportJournal} style={btnGhost}>Download journal</button>}
+          <div style={{ fontSize: 13, color: T }}>{doneN}/{all.length} done</div>
+        </div>
       </header>
       <div className="prog-shell" style={{ flex: 1, display: "grid", gridTemplateColumns: "280px 1fr", minHeight: 0 }}>
         <aside style={{ borderRight: `1px solid ${D3}`, overflowY: "auto", padding: 16 }}>
           <div style={{ height: 6, background: D3, borderRadius: 99, marginBottom: 16 }}>
             <div style={{ width: `${(doneN / all.length) * 100}%`, height: "100%", background: G, borderRadius: 99 }} />
           </div>
+          <div style={{ fontSize: 11, color: T, marginTop: -8, marginBottom: 16 }}>Saved in this browser only. Download your journal from the header as you go.</div>
           {MODULES.map(m => (
             <div key={m.id} style={{ marginBottom: 16 }}>
               <div style={{ fontSize: 11, color: G, letterSpacing: 1, fontWeight: 700 }}>MODULE {m.id} · WEEKS {m.weeks}</div>
@@ -153,7 +178,11 @@ export function Program({ onBack }) {
             </div>
             {les.id === "6b" && plan.length > 0 && (
               <div style={{ marginTop: 28, padding: 18, border: `1px solid ${G}33`, borderRadius: 12, background: D2 }}>
-                <h2 style={{ ...h2, marginTop: 0 }}>Journal record</h2>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                  <h2 style={{ ...h2, margin: 0 }}>Journal record</h2>
+                  <button onClick={exportJournal} style={btnGold}>Download journal</button>
+                </div>
+                <p style={{ color: T, fontSize: 13, margin: "8px 0 14px" }}>This record is stored only in this browser. Download it to keep it.</p>
                 {all.map(l => store.notes[l.id] ? (
                   <div key={l.id} style={{ marginBottom: 12 }}>
                     <p style={{ color: L, fontSize: 14, fontWeight: 700 }}>{store.chapters[l.id]} · p. {store.pages[l.id]}{store.witnesses[l.id] ? ` · shown to ${store.witnesses[l.id]}` : ""}</p>

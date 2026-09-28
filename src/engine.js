@@ -320,7 +320,7 @@ export function scanReport({ orgName, industry, size, context, answers }) {
     });
     const worst = bits.some((b) => b.mark === "gap") ? "Gap" : bits.some((b) => b.mark === "partial") ? "Partial" : "Held";
     if (worst !== "Held") actions.push(`- **${cat.category}.** ${cat.fix}`);
-    lines.push(`## ${cat.category} — ${worst}`);
+    lines.push(`## ${cat.category}: ${worst}`);
     lines.push(bits.map((b) => `${b.i + 1}. ${b.mark === "held" ? "Held" : b.mark === "partial" ? "Partial" : "Gap"}: ${b.raw}`).join("\n"));
     if (worst !== "Held") lines.push(cat.weak);
   });
@@ -332,7 +332,7 @@ export function scanReport({ orgName, industry, size, context, answers }) {
   else if (/nonprofit|non-profit|ngo|community/.test(sector)) sectorNote = "You named a nonprofit context. Chapter 6’s Community Connect pattern is deciding with the neighborhood, not for it. Speed of a grant cycle is not a reason to skip that.";
   else if (/public|government|agency|city|school/.test(sector)) sectorNote = "A public mandate does not replace the stop-rule. The people the system sorts still have to be able to appeal it.";
   return [
-    `# ${org} — readiness from the book`,
+    `# ${org}: readiness from the book`,
     `${industry || "Sector not named"}. ${size || "Size not named"}. ${context ? clip(context, 220) : "No tools named."}`,
     `**Risk: ${risk}.** ${held} answers describe a practice in place. ${partials} are partial. ${gaps} are gaps or too thin to count.`,
     `This reading uses the book’s tests. It does not call a model, and it cannot see what you did not write.`,
@@ -424,7 +424,7 @@ export function gapReport({ leader, rater, self, team }) {
   const worst = [...rows].sort((a, b) => a.t - b.t)[0];
   const widest = [...rows].sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap))[0];
   return [
-    `# ${leader || "Leader"} — self against the team`,
+    `# ${leader || "Leader"}: self against the team`,
     `Rater: ${rater || "Not named"}. Scores are the percent of the short scale, computed on this device.`,
     ...rows.map((r) => `## ${r.name}\nSelf ${r.s}%. Team ${r.t}%. Gap ${r.gap > 0 ? "+" : ""}${r.gap}.\n\n${r.note}`),
     `## Where to work`,

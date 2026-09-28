@@ -311,7 +311,7 @@ function AssessmentTool({ onBack }) {
                 <div key={dim} style={{ marginBottom: 20 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
                     <span style={{ fontSize: 13, fontWeight: 600, color: L }}>{data.title}</span>
-                    <span style={{ fontSize: 12, color: data.color, fontWeight: 600 }}>{s.tot}/{s.max} ({s.pct}%) — {lv}</span>
+                    <span style={{ fontSize: 12, color: data.color, fontWeight: 600 }}>{s.tot}/{s.max} ({s.pct}%): {lv}</span>
                   </div>
                   <div style={{ height: 8, background: D3, borderRadius: 4, overflow: "hidden" }}>
                     <div style={{ height: "100%", width: `${s.pct}%`, background: data.color, borderRadius: 4, transition: "width 0.8s" }} />
@@ -488,7 +488,7 @@ function ScannerTool({ onBack }) {
         {report && (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif" }}>{orgName?`${orgName} — `:""}AI Readiness Report</h3>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif" }}>{orgName?`${orgName}: `:""}AI Readiness Report</h3>
               <button onClick={() => { setStep(0); setCatIdx(0); setAnswers({}); setReport(""); }} style={{ fontSize: 11, padding: "6px 12px", background: D2, border: `1px solid ${D3}`, borderRadius: 6, color: T, cursor: "pointer" }}>Start Over</button>
             </div>
             <Card><RenderMd text={report} /></Card>
@@ -663,14 +663,14 @@ function FeedbackTool({ onBack }) {
 
   if (step===1) return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <ToolHeader title="360 Feedback" subtitle={`Self-Assessment — ${selfFilled}/${total}`} onBack={onBack} />
+      <ToolHeader title="360 Feedback" subtitle={`Self-Assessment: ${selfFilled}/${total}`} onBack={onBack} />
       <div style={{ padding: "8px 24px", borderBottom: `1px solid ${D3}`, flexShrink: 0 }}>
         <div style={{ height: 4, background: D3, borderRadius: 2, overflow: "hidden" }}>
           <div style={{ height: "100%", width: `${(selfFilled/total)*100}%`, background: G, borderRadius: 2, transition: "width 0.3s" }} />
         </div>
       </div>
       <div style={{ flex: 1, overflow: "auto", padding: "16px 24px" }}>
-        <div style={{ fontSize: 13, color: T, marginBottom: 16 }}>Rate yourself honestly — 1 (rarely) to 5 (consistently).</div>
+        <div style={{ fontSize: 13, color: T, marginBottom: 16 }}>Rate yourself honestly: 1 (rarely) to 5 (consistently).</div>
         {Object.keys(SHORT).map(dim => <ScoreSection key={dim} dim={dim} scores={selfScores} setScores={setSelfScores} />)}
         <button onClick={() => { if(selfFilled>=total) setStep(2); }} disabled={selfFilled<total}
           style={{ width: "100%", padding: 14, background: selfFilled>=total?`linear-gradient(135deg,${G},#a88a28)`:D3, border: "none", borderRadius: 10, color: selfFilled>=total?D:T, fontSize: 14, fontWeight: 700, cursor: selfFilled>=total?"pointer":"not-allowed", marginTop: 8 }}>
@@ -719,7 +719,7 @@ function FeedbackTool({ onBack }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <ToolHeader title="360 Feedback" subtitle={`${leaderName} — Gap Analysis`} onBack={onBack} />
+      <ToolHeader title="360 Feedback" subtitle={`${leaderName}: Gap Analysis`} onBack={onBack} />
       <div style={{ flex: 1, overflow: "auto", padding: "16px 24px" }}>
         <Card style={{ marginBottom: 20 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: L, marginBottom: 16, fontFamily: "'Cormorant Garamond',serif" }}>Self vs. Team Perception</div>
@@ -1009,7 +1009,7 @@ export default function AILTSite() {
             <SectionTitle tag="About" title="Matthew Culwell" />
             <FI><Card style={{ padding: 32 }}>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory and a doctoral researcher focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
-              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities — a gap that becomes critical when algorithms make decisions once exclusively human.</p>
+              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities, a gap that becomes critical when algorithms make decisions once exclusively human.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in evidence from over 100,000 participants.</p>
             </Card></FI>
           </div>

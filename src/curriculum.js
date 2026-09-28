@@ -53,11 +53,11 @@ export const MODULES = [
         "check": {
           "q": "In Chapter 2, adaptive capacity is the ability to…",
           "options": [
-            "Execute the five-year plan faster",
             "Recognize when the established approach has stopped working and build a new response",
+            "Execute the five-year plan faster",
             "Buy the tool the competitor already bought"
           ],
-          "answer": 1
+          "answer": 0
         }
       }
     ]
@@ -91,10 +91,10 @@ export const MODULES = [
           "q": "Chapter 3 treats inclusion, once an algorithm is screening people, as…",
           "options": [
             "A policy on the website",
-            "Whether the people the system can harm helped evaluate it before it went live",
-            "A quota the vendor certifies"
+            "A quota the vendor certifies",
+            "Whether the people the system can harm helped evaluate it before it went live"
           ],
-          "answer": 1
+          "answer": 2
         }
       },
       {
@@ -154,10 +154,10 @@ export const MODULES = [
           "q": "Chapter 5’s opening is about…",
           "options": [
             "Teaching clinicians to obey the alert",
-            "The difference between trusting the model and trusting the organization enough to challenge it",
-            "Replacing clinical judgment with a better threshold"
+            "Replacing clinical judgment with a better threshold",
+            "The difference between trusting the model and trusting the organization enough to challenge it"
           ],
-          "answer": 1
+          "answer": 2
         }
       },
       {
@@ -180,11 +180,11 @@ export const MODULES = [
         "check": {
           "q": "Chapter 6’s cases are in the book in order to show that…",
           "options": [
-            "One heroic leader can install the theory",
             "The same capacities show up across a merger, a lab, a product company, a green firm, and a nonprofit, and they do not work alone",
+            "One heroic leader can install the theory",
             "Culture work is only a corporate problem"
           ],
-          "answer": 1
+          "answer": 0
         }
       }
     ]
@@ -243,11 +243,11 @@ export const MODULES = [
         "check": {
           "q": "The evidence review in Chapters 8 and 9 is…",
           "options": [
-            "A new experiment that measured AILT directly",
             "A reading of converging studies, with Chapter 9 testing the five predictions one by one",
+            "A new experiment that measured AILT directly",
             "A list of companies that adopted the theory"
           ],
-          "answer": 1
+          "answer": 0
         }
       }
     ]
@@ -280,10 +280,10 @@ export const MODULES = [
           "q": "Chapter 10’s stance toward the evidence is…",
           "options": [
             "The theory is proven and finished",
-            "The pattern is strong and consistent, and the constructs still need direct measurement",
-            "Industry research is the only evidence that counts"
+            "Industry research is the only evidence that counts",
+            "The pattern is strong and consistent, and the constructs still need direct measurement"
           ],
-          "answer": 1
+          "answer": 2
         }
       },
       {
@@ -306,11 +306,11 @@ export const MODULES = [
         "check": {
           "q": "Chapter 12 says the leader AILT requires must…",
           "options": [
-            "Become the data scientist",
             "Know enough to ask what the system was trained on, who is missing, and what happens when the answer is unwelcome",
+            "Become the data scientist",
             "Delegate AI questions to procurement"
           ],
-          "answer": 1
+          "answer": 0
         }
       }
     ]
@@ -370,10 +370,10 @@ export const MODULES = [
           "q": "A finished reading of this book shows up as…",
           "options": [
             "A feeling that the theory is inspiring",
-            "Three moves someone else can check, each tied to a page",
-            "A summary of all fifteen chapters in one paragraph"
+            "A summary of all fifteen chapters in one paragraph",
+            "Three moves someone else can check, each tied to a page"
           ],
-          "answer": 1
+          "answer": 2
         }
       }
     ]
