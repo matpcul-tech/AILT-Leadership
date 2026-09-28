@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { advise, designMeeting, scanReport, coachOpen, coachReply, gapReport, readProfile } from "./engine.js";
 import { Program } from "./program.jsx";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
@@ -75,62 +76,6 @@ function ToolHeader({ title, subtitle, onBack }) {
 }
 
 const IS = { width: "100%", padding: "12px 14px", background: D2, border: `1px solid ${D3}`, borderRadius: 8, color: L, fontSize: 13, fontFamily: "inherit", outline: "none", boxSizing: "border-box" };
-
-const ADVISOR_SYS = `You are the AILT Leadership Advisor grounded in Adaptive Inclusive Leadership Theory by Matthew Culwell.
-AILT has three constructs and one mediator:
-1. INCLUSIVE ADAPTIVE CAPACITY (IAC) - Collective capability to respond to challenges by integrating diverse perspectives.
-2. PARTICIPATORY SENSEMAKING (PS) - Collaborative interpretation of ambiguity through diverse perspectives. Critical for AI black-box outputs.
-3. EQUITY-CENTERED FLEXIBILITY (ECF) - Adapting structures during change while advancing equity.
-4. PSYCHOLOGICAL SAFETY (Mediator) - Shared belief team is safe for risk-taking (Edmondson, 1999).
-PROPOSITIONS: P1: IAC+ECF reciprocal. P2: PS mediates IAC to outcomes. P3: IAC+PS+ECF=emergent resilience. P4: Inclusivity deficits constrain adaptation MORE than reverse. P5: Continuous recalibration required.
-EVIDENCE: Li et al. 2025 (105 samples N=39,948), Frazier et al. 2017 (136 samples N>22,000), An et al. 2025 (PNAS Nexus AI bias), Amazon AI hiring (Dastin 2018), EEOC v. iTutorGroup 2023, Mobley v. Workday 2025.
-RESPOND WITH: 1) Situation Analysis 2) Recommendations with emoji tags for IAC, PS, ECF, Psych Safety 3) Key Risk 4) One action for next 48 hours. Under 500 words. Direct and specific.`;
-
-const MEETING_SYS = `You are the AILT Meeting Architect. Transform any meeting into an AILT-aligned experience.
-Every meeting must include: PSYCHOLOGICAL SAFETY OPENER (2-3 min, exact script), PARTICIPATORY SENSEMAKING BLOCK (specific method), EQUITY CHECK (explicit voice redistribution), COMMITMENT CLOSE (names, deadlines, reflection).
-Time-box every segment. Provide exact FACILITATOR SCRIPTS. Include a cheat sheet for dominance, silence, and conflict. Adapt to meeting duration. Be practical.`;
-
-const SCANNER_SYS = `You are the AILT AI Readiness Scanner. Analyze an organization's readiness to deploy AI equitably.
-Generate a comprehensive risk report with:
-## Overall Readiness Score
-Rate 0-100 with label: Critical Risk / High Risk / Moderate Risk / Developing / Ready
-
-## Five-Category Assessment
-Score each 0-20:
-1. Inclusive Governance (IAC)
-2. Sensemaking Infrastructure (PS)
-3. Equity Safeguards (ECF)
-4. Psychological Safety
-5. Technical Accountability
-
-## Top 3 Risk Flags
-Specific named risks with evidence.
-
-## 90-Day Action Plan
-Three concrete sequenced actions with owners and success metrics.
-
-## Legal Exposure
-EEOC/Title VII exposure note.
-
-Reference Amazon, iTutorGroup, Workday cases where relevant. Under 600 words.`;
-
-const COACH_SYS = `You are the AILT Leadership Coach grounded in Adaptive Inclusive Leadership Theory by Matthew Culwell.
-Five coaching modes: REFLECT, CHALLENGE, PLAN, PRACTICE, REVIEW.
-Ask one powerful question at a time. Build on previous responses. Tie insights back to IAC, PS, ECF, or Psychological Safety. Under 300 words. Warm, direct, challenging.`;
-
-const FEEDBACK_SYS = `You are an AILT 360 Feedback Analyst.
-Given self-scores and team scores across IAC, PS, ECF, and Psychological Safety, provide:
-## Key Gaps
-2-3 largest gaps between self and team perception.
-## Blind Spot Analysis
-What explains the discrepancies?
-## Strength Confirmation
-Where do self and team agree?
-## Development Priority
-One AILT construct to focus on first.
-## Three Conversations to Have
-Scripted conversation starters to open dialogue about the gaps.
-Under 400 words.`;
 
 const ASSESS_ITEMS = {
   iac: { title: "Inclusive Adaptive Capacity (IAC)", color: "#2563eb", items: [
@@ -236,45 +181,13 @@ const MEETING_TYPES = [
 ];
 
 const TOOLS = [
-  { id: "advisor", icon: "🎯", title: "Leadership Advisor", desc: "Describe any scenario, get AILT-aligned analysis with construct-level recommendations.", tag: "AI-Powered" },
-  { id: "assessment", icon: "📊", title: "Self-Assessment", desc: "40 items across IAC, PS, ECF, and Psychological Safety. Get your scores instantly.", tag: "Interactive" },
-  { id: "meeting", icon: "📋", title: "Meeting Architect", desc: "Generate AILT-aligned agendas with facilitator scripts, equity checks, and safety openers.", tag: "AI-Powered" },
-  { id: "scanner", icon: "🔍", title: "AI Readiness Scanner", desc: "Assess your organization readiness to deploy AI equitably. Full risk report.", tag: "Enterprise" },
-  { id: "coach", icon: "💬", title: "Leadership Coach", desc: "Ongoing conversational coaching across five modes. Remembers your goals.", tag: "AI-Powered" },
-  { id: "360", icon: "🔄", title: "360 Feedback", desc: "Collect team ratings, see self vs team gaps, get AI gap analysis.", tag: "Team" },
+  { id: "advisor", icon: "🎯", title: "Leadership Advisor", desc: "Describe a situation. The reading comes from the book’s cases and the three capacities, not from a model.", tag: "From the book" },
+  { id: "assessment", icon: "📊", title: "Self-Assessment", desc: "40 items across IAC, PS, ECF, and Psychological Safety. Scored on this device.", tag: "On this device" },
+  { id: "meeting", icon: "📋", title: "Meeting Architect", desc: "A timed agenda with a safety opener, two readings, an equity check, and a stop-rule.", tag: "From the book" },
+  { id: "scanner", icon: "🔍", title: "AI Readiness Scanner", desc: "Fifteen questions. Gaps are scored from what you write, then turned into a ninety-day list.", tag: "On this device" },
+  { id: "coach", icon: "💬", title: "Leadership Coach", desc: "Five modes of questions drawn from the book. It remembers the thread of this session only.", tag: "From the book" },
+  { id: "360", icon: "🔄", title: "360 Feedback", desc: "Self versus team on twenty behaviors. The gap note is computed here.", tag: "On this device" },
 ];
-
-async function callAPI(sys, prompt, maxTok = 1000) {
-  let res;
-  try {
-    res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages: [{ role: "user", content: prompt }] }),
-    });
-  } catch {
-    throw new Error("This tool cannot reach a model from the browser. The 12-week program and the self-assessment work without one.");
-  }
-  const data = await res.json().catch(() => ({}));
-  if (data.error) throw new Error("The model did not answer. Use the 12-week program, which stays on this device. " + data.error.message);
-  return data.content?.map(b => b.text || "").join("\n") || "No response.";
-}
-
-async function callAPIHistory(sys, messages, maxTok = 600) {
-  let res;
-  try {
-    res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages }),
-    });
-  } catch {
-    throw new Error("This tool cannot reach a model from the browser. The 12-week program and the self-assessment work without one.");
-  }
-  const data = await res.json().catch(() => ({}));
-  if (data.error) throw new Error("The model did not answer. Use the 12-week program, which stays on this device. " + data.error.message);
-  return data.content?.map(b => b.text || "").join("\n") || "No response.";
-}
 
 function RenderMd({ text }) {
   return (
@@ -309,8 +222,7 @@ function AdvisorTool({ onBack }) {
   const [resp, setResp] = useState("");
   const [load, setLoad] = useState(false);
   const run = useCallback((prompt) => {
-    setLoad(true); setResp("");
-    callAPI(ADVISOR_SYS, prompt).then(r => { setResp(r); setLoad(false); }).catch(e => { setResp("Error: " + e.message); setLoad(false); });
+    setResp(advise(prompt));
   }, []);
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -413,6 +325,7 @@ function AssessmentTool({ onBack }) {
                 {Object.keys(ASSESS_ITEMS).reduce((a, d) => a + getScore(d).tot, 0)} / 200
               </div>
             </div>
+            <p style={{ fontSize: 14, color: T, lineHeight: 1.7, marginTop: 16 }}>{readProfile(Object.keys(ASSESS_ITEMS).map(d => ({ ...getScore(d), title: ASSESS_ITEMS[d].title })))}</p>
           </Card>
         )}
       </div>
@@ -429,10 +342,8 @@ function MeetingTool({ onBack }) {
   const [resp, setResp] = useState("");
   const [load, setLoad] = useState(false);
   const design = () => {
-    setLoad(true); setResp("");
-    const typLabel = MEETING_TYPES.find(t => t.v === type)?.l;
-    callAPI(MEETING_SYS, `Design AILT meeting:\nTopic: ${topic}\nType: ${typLabel}\nDuration: ${duration} min\nParticipants: ${participants}\nContext: ${context}`, 2000)
-      .then(r => { setResp(r); setLoad(false); }).catch(e => { setResp("Error: " + e.message); setLoad(false); });
+    const text = designMeeting({ topic, type, duration, participants, context });
+    setResp(text);
   };
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -471,15 +382,6 @@ function ScannerTool({ onBack }) {
   const [report, setReport] = useState("");
   const [load, setLoad] = useState(false);
   const [catIdx, setCatIdx] = useState(0);
-
-  const buildPrompt = () => {
-    let p = `Organization: ${orgName||"Anonymous"}\nIndustry: ${industry||"Not specified"}\nSize: ${size||"Not specified"}\nContext: ${context||"None"}\n\nAssessment Responses:\n`;
-    SCANNER_QUESTIONS.forEach(cat => {
-      p += `\n${cat.category}:\n`;
-      cat.questions.forEach((q, i) => { p += `- ${q}\n  Response: ${answers[`${cat.category}-${i}`]||"No answer provided"}\n`; });
-    });
-    return p;
-  };
 
   const currentCat = SCANNER_QUESTIONS[catIdx];
   const catAnswered = currentCat.questions.filter((_, i) => answers[`${currentCat.category}-${i}`]?.trim()).length;
@@ -566,10 +468,9 @@ function ScannerTool({ onBack }) {
           </button>}
           {isLast && <button onClick={() => {
             if (!allAnswered) return;
-            setLoad(true); setStep(2);
-            callAPI(SCANNER_SYS, buildPrompt(), 1200)
-              .then(r => { setReport(r); setLoad(false); })
-              .catch(e => { setReport("Error: " + e.message); setLoad(false); });
+            setStep(2);
+            setReport(scanReport({ orgName, industry, size, context, answers }));
+            setLoad(false);
           }} disabled={!allAnswered}
             style={{ flex: 1, padding: 12, background: allAnswered?`linear-gradient(135deg,${G},#a88a28)`:D3, border: "none", borderRadius: 8, color: allAnswered?D:T, fontSize: 13, fontWeight: 700, cursor: allAnswered?"pointer":"not-allowed" }}>
             Generate Risk Report
@@ -615,25 +516,13 @@ function CoachTool({ onBack }) {
     setInput("");
     setLoad(true);
     const updated = [...messages, { role: "user", content: userMsg }];
-    setMessages(updated);
-    const modeLabel = COACH_MODES.find(m => m.id === mode)?.label || mode;
-    const sys = `${COACH_SYS}\n\nCurrent mode: ${modeLabel.toUpperCase()}.\nLeader goal: ${goal||"Not specified"}.`;
-    try {
-      const reply = await callAPIHistory(sys, updated, 600);
-      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
-    } catch(e) {
-      setMessages(prev => [...prev, { role: "assistant", content: "Connection error. Please try again." }]);
-    }
+    setMessages([...updated, { role: "assistant", content: coachReply({ mode, goal, history: updated }) }]);
     setLoad(false);
   };
 
   const startSession = () => {
-    setStarted(true); setLoad(true);
-    const modeLabel = COACH_MODES.find(m => m.id === mode)?.label || mode;
-    const sys = `${COACH_SYS}\n\nMode: ${modeLabel.toUpperCase()}.\nGoal: ${goal||"general AILT development"}.`;
-    callAPIHistory(sys, [{ role: "user", content: `Start our ${modeLabel} coaching session. My goal: ${goal||"to develop as an AILT leader"}. Open with one tailored question.` }], 400)
-      .then(r => { setMessages([{ role: "assistant", content: r }]); setLoad(false); })
-      .catch(() => { setMessages([{ role: "assistant", content: "Could not connect. Please try again." }]); setLoad(false); });
+    setStarted(true);
+    setMessages([{ role: "assistant", content: coachOpen(mode, goal) }]);
   };
 
   if (!started) return (
@@ -757,7 +646,7 @@ function FeedbackTool({ onBack }) {
           <div style={{ textAlign: "center", marginBottom: 28 }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🔄</div>
             <h2 style={{ fontSize: 22, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif", marginBottom: 8 }}>AILT 360 Feedback</h2>
-            <p style={{ fontSize: 14, color: T, lineHeight: 1.7 }}>Rate yourself across 20 AILT behaviors, enter team ratings, and get an AI gap analysis.</p>
+            <p style={{ fontSize: 14, color: T, lineHeight: 1.7 }}>Rate yourself across 20 AILT behaviors, enter team ratings, and read the gap. Nothing is sent to a model.</p>
           </div>
           <Card style={{ marginBottom: 20 }}>
             <label style={{ fontSize: 10, fontWeight: 700, color: T, textTransform: "uppercase", display: "block", marginBottom: 8 }}>Your Name (leader being rated)</label>
@@ -810,11 +699,15 @@ function FeedbackTool({ onBack }) {
           <button onClick={() => setStep(1)} style={{ flex: 1, padding: 12, background: D2, border: `1px solid ${D3}`, borderRadius: 8, color: T, cursor: "pointer", fontSize: 13 }}>Back</button>
           <button onClick={() => {
             if(teamFilled<total) return;
-            setLoad(true); setStep(3);
-            const sp = Object.keys(ASSESS_ITEMS).map(d=>`${ASSESS_ITEMS[d].title}: ${getPct(selfScores,d)}%`).join(", ");
-            const tp = Object.keys(ASSESS_ITEMS).map(d=>`${ASSESS_ITEMS[d].title}: ${getPct(teamScores,d)}%`).join(", ");
-            callAPI(FEEDBACK_SYS, `Leader: ${leaderName}\nSelf scores: ${sp}\nTeam scores: ${tp}\nRater: ${raterName||"Anonymous"}`, 900)
-              .then(r=>{setReport(r);setLoad(false);}).catch(e=>{setReport("Error: "+e.message);setLoad(false);});
+            setStep(3);
+            const pct = (scores, dim) => getPct(scores, dim);
+            setReport(gapReport({
+              leader: leaderName,
+              rater: raterName,
+              self: { iac: pct(selfScores, "iac"), ps: pct(selfScores, "ps"), ecf: pct(selfScores, "ecf"), psy: pct(selfScores, "psy") },
+              team: { iac: pct(teamScores, "iac"), ps: pct(teamScores, "ps"), ecf: pct(teamScores, "ecf"), psy: pct(teamScores, "psy") },
+            }));
+            setLoad(false);
           }} disabled={teamFilled<total}
             style={{ flex: 2, padding: 12, background: teamFilled>=total?`linear-gradient(135deg,${G},#a88a28)`:D3, border: "none", borderRadius: 8, color: teamFilled>=total?D:T, fontSize: 13, fontWeight: 700, cursor: teamFilled>=total?"pointer":"not-allowed" }}>
             Generate Gap Analysis
