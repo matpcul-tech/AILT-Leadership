@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { MODULES } from "./curriculum.js";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
-const KEY = "ailt-program-v2";
+const KEY = "ailt-program-v3";
 
 function empty() { return { done: {}, notes: {}, picks: {}, chapters: {}, pages: {} }; }
 
@@ -109,7 +109,7 @@ export function Program({ onBack }) {
             <div style={{ border: `1px solid ${G}`, background: D2, borderRadius: 12, padding: 16, marginBottom: 22 }}>
               <div style={{ fontSize: 11, letterSpacing: 2, color: G, fontWeight: 700 }}>READ THIS FIRST</div>
               <p style={{ lineHeight: 1.6, marginTop: 8 }}>{les.reading}</p>
-              <a href="https://a.co/d/056JGgCx" target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 10, color: G, fontWeight: 700, fontSize: 14 }}>Leadership for the Age of AI</a>
+              <a href="https://a.co/d/056JGgCx" target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 10, color: G, fontWeight: 700, fontSize: 14 }}>Leadership for the Age of Artificial Intelligence</a>
             </div>
             <h2 style={h2}>What to watch for while you read</h2>
             {les.teach.map((p, i) => <p key={i} style={{ lineHeight: 1.7, marginBottom: 14, color: L }}>{p}</p>)}

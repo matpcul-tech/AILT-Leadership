@@ -1,294 +1,378 @@
 export const MODULES = [
   {
-    id: 1, weeks: "1–2", title: "Foundations of AILT",
-    construct: "The frame",
-    summary: "Why adaptability and inclusivity fail when they are treated as separate skills, and why psychological safety is the floor under both.",
-    lessons: [
+    "id": 1,
+    "weeks": "1–2",
+    "title": "When the algorithm decides",
+    "construct": "Part One",
+    "summary": "The preface and the first two chapters. The book opens on Amazon’s résumé tool, then on what adaptive capacity actually is.",
+    "lessons": [
       {
-        id: "1a", week: 1, minutes: 40, title: "One problem, not two",
-        aim: "Name the gap AILT closes: organizations treat adaptability and inclusivity as rival programs.",
-        reading: 'Read Chapter 1 of Leadership for the Age of AI, including the story that opens it. Copy the chapter title exactly as printed. This screen is not the chapter.',
-        teach: [
-          "Most leadership models ask people to be agile or to be inclusive, as if those were different courses. Adaptive Inclusive Leadership Theory starts from the opposite claim. When the challenge is novel, the people who see it differently are the adaptation. Leave them out and the organization gets faster at the old answer.",
-          "That gap gets dangerous once algorithms make decisions that used to be human: hiring, scheduling, risk, who gets a second look. The model is only as inclusive as the room that chose it, tested it, and is allowed to contradict it.",
-          "AILT names three capacities and one condition. Inclusive Adaptive Capacity is how a system responds by integrating difference. Participatory Sensemaking is how a team interprets what it cannot yet explain. Equity-Centered Flexibility is how change is redesigned when it lands unevenly. Psychological safety is the shared belief that speaking up will not be punished. Without that belief, the other three are theater."
+        "id": "1a",
+        "week": 1,
+        "minutes": 70,
+        "title": "When the Algorithm Decides",
+        "aim": "See why the book says adaptability and inclusivity fail when they are treated as separate skills.",
+        "reading": "Read the Preface and Chapter 1, “When the Algorithm Decides,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 1. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "Stay with the Amazon résumé system and what it learned from a decade of mostly male résumés. The chapter’s claim is that the story is not about Amazon.",
+          "Mark the three capabilities, Inclusive Adaptive Capacity, Participatory Sensemaking, and Equity-Centered Flexibility, and the line that says psychological safety holds them together. Then mark the fourth prediction: inclusion deficits constrain adaptation more severely than the reverse."
         ],
-        practice: [
-          "Write the last change your organization called “agile.”",
-          "List who was in the room when it was named, and who felt it first.",
-          "One sentence: whose reading of the problem never made the plan?"
+        "practice": [
+          "Read the preface question before Chapter 1.",
+          "Underline one sentence you would not have written the same way.",
+          "Note which of the five predictions your organization is currently ignoring."
         ],
-        prompt: 'Retell the opening story in your own words and name the leadership problem it is really about. What did you think this required before the chapter, and what does the page say instead?',
-        check: {
-          q: "AILT treats inclusivity as…",
-          options: ["A separate program from adaptation", "The raw material of adaptation", "A legal checklist after the pilot ships"],
-          answer: 1
+        "prompt": "Retell the Amazon story in your own words and say what the chapter claims it is really about. Which of the five predictions changed how you see a system your organization already uses?",
+        "check": {
+          "q": "Chapter 1’s premise is that adaptability and inclusivity are…",
+          "options": [
+            "Separate courses, one for agility and one for inclusion",
+            "Interdependent. Each one needs the other once an algorithm is making the call",
+            "A legal review that happens after the model ships"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "1b", week: 2, minutes: 40, title: "Safety is the floor",
-        aim: "Use psychological safety as a working condition, not a poster.",
-        reading: 'Read Chapter 2. If a For Your Organization section sits with it, do that section before you write. Copy the chapter title as printed.',
-        teach: [
-          "Edmondson’s finding, confirmed across Frazier’s meta-analysis of more than 22,000 people, is simple: teams learn when interpersonal risk is survivable. AILT uses that as the mediating mechanism. Diverse perspective does not enter a decision if the cost of offering it is status, the job, or silence afterward.",
-          "Safety is not comfort and it is not agreement. It is the ability to say “the model is wrong about my team” and still be in the room next week.",
-          "Leaders install it with behavior, not a values slide. The first move is a script you actually say: what is safe to challenge here, what happens when someone is wrong, and what you will do when you are the one who is wrong."
+        "id": "1b",
+        "week": 2,
+        "minutes": 60,
+        "title": "The Adaptive Organization",
+        "aim": "Use Chapter 2’s account of adaptive capacity, not a slogan about being agile.",
+        "reading": "Read Chapter 2, “The Adaptive Organization,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 21. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The chapter opens in March 2020. The difference it cares about is not size or industry. It is whether the organization could tell that the old response had stopped working.",
+          "Watch how the book separates a technical problem, where the expertise already exists, from an adaptive challenge, where people have to learn. AI rollouts are usually sold as the first and lived as the second."
         ],
-        practice: [
-          "Write a 60-second opener you will use in your next staff meeting.",
-          "Name one recent moment someone went quiet. What did it cost?",
-          "Decide the one behavior you will stop this week that punishes bad news."
+        "practice": [
+          "Mark the sentence that defines adaptive capacity.",
+          "Write the technical part and the adaptive part of one live initiative.",
+          "Name who has the learning the plan does not yet have."
         ],
-        prompt: 'What does this chapter say psychological safety is, and what does it say it is not? Name one behavior you will stop because of a specific page.',
-        check: {
-          q: "Psychological safety in AILT is…",
-          options: ["Niceness and consensus", "The condition that lets the three constructs work", "A survey you run once a year"],
-          answer: 1
+        "prompt": "How does Chapter 2 define adaptive capacity, and what does the March 2020 opening do that a definition alone would not? Apply the technical-versus-adaptive distinction to one initiative you are in.",
+        "check": {
+          "q": "In Chapter 2, adaptive capacity is the ability to…",
+          "options": [
+            "Execute the five-year plan faster",
+            "Recognize when the established approach has stopped working and build a new response",
+            "Buy the tool the competitor already bought"
+          ],
+          "answer": 1
         }
       }
     ]
   },
   {
-    id: 2, weeks: "3–4", title: "Inclusive Adaptive Capacity",
-    construct: "IAC",
-    summary: "Tell a technical problem from an adaptive challenge, and put the people who live the challenge inside the response.",
-    lessons: [
+    "id": 2,
+    "weeks": "3–4",
+    "title": "Inclusion and the decision",
+    "construct": "Part One",
+    "summary": "Chapters 3 and 4. A policy is not inclusion, and a ranked list is not a decision.",
+    "lessons": [
       {
-        id: "2a", week: 3, minutes: 45, title: "Technical or adaptive",
-        aim: "Stop applying a technical fix to a problem that requires new learning.",
-        reading: 'Read Chapter 3. Stay with how the book separates a technical problem from an adaptive one. Copy the chapter title as printed.',
-        teach: [
-          "A technical problem has a known answer and an expert who can install it. An adaptive challenge does not. People must change what they believe, protect, or know how to do. AI rollouts are usually sold as technical and lived as adaptive.",
-          "Inclusive Adaptive Capacity is the collective skill of responding by integrating perspectives the expert does not have. Seniority is not a substitute for that. If the room is uniform, the adaptation will be too.",
-          "The practical test: if you removed the people most affected and the plan still looks the same, you do not have an adaptive response. You have a deployment."
+        "id": "2a",
+        "week": 3,
+        "minutes": 60,
+        "title": "Inclusion When the Algorithm Is Watching",
+        "aim": "See how Chapter 3 separates a diversity statement from a system that was never examined by the people it sorts.",
+        "reading": "Read Chapter 3, “Inclusion When the Algorithm Is Watching,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 43. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The opening is the EEOC matter: recruiting software that rejected women 55 and older and men 60 and older. More than two hundred people never reached a human reviewer.",
+          "The chapter’s point is that a non-discrimination policy does not govern a model. Inclusion here means the people the system can harm are in the evaluation before it goes live."
         ],
-        practice: [
-          "Take one live initiative. Label it technical, adaptive, or mixed.",
-          "For the adaptive part, write the learning the organization does not have yet.",
-          "Name two people who hold that learning and are not currently decision-makers."
+        "practice": [
+          "Mark the sentence that says the algorithm did not need intent.",
+          "Name one system in your organization that has a policy and no such review.",
+          "Write who was missing from the last AI decision you know about."
         ],
-        prompt: 'How does the chapter separate a technical problem from an adaptive one? Apply that distinction to one initiative you are in, using the book’s language and then your situation.',
-        check: {
-          q: "An adaptive challenge is one where…",
-          options: ["An expert already has the fix", "People must learn something the current plan does not know", "The vendor’s documentation is complete"],
-          answer: 1
+        "prompt": "What does Chapter 3 say the age-screening case proves that a values statement cannot? Name one system you would not want to defend with “we have a policy.”",
+        "check": {
+          "q": "Chapter 3 treats inclusion, once an algorithm is screening people, as…",
+          "options": [
+            "A policy on the website",
+            "Whether the people the system can harm helped evaluate it before it went live",
+            "A quota the vendor certifies"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "2b", week: 4, minutes: 45, title: "Who gets to integrate",
-        aim: "Design a decision so difference changes the answer, not just the attendance list.",
-        reading: 'Read Chapter 4. Mark the passage that says when a different perspective has actually changed a decision. Copy the chapter title as printed.',
-        teach: [
-          "Inviting people is not integration. Integration is when a perspective changes the specification, the metric, or the stop-rule. IAC fails in the polite meeting where everyone speaks and the original slide still ships.",
-          "Build a small structure: affected group, a skeptic from another function, and the person who will operate the system on a Tuesday. Give them a question with teeth. “What would make this unsafe or unfair in your work?” is a better prompt than “any concerns?”",
-          "Then close the loop in writing. What changed because they were there. If nothing changed, say that too. Pretending is how safety dies."
+        "id": "2b",
+        "week": 4,
+        "minutes": 60,
+        "title": "When the Data Has an Opinion",
+        "aim": "Use Chapter 4’s hiring-committee scene. The ranking is not the decision.",
+        "reading": "Read Chapter 4, “Making Decisions When the Data Has an Opinion,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 65. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The chapter opens with a committee, ten candidates, and fifteen minutes. Candidate Seven is a Black woman with a non-traditional path, ranked ninth. In most rooms the ranking stands.",
+          "Watch the move the book wants instead of “questioning the algorithm feels like questioning math.” Participatory sensemaking is the room interpreting the score, not obeying it."
         ],
-        practice: [
-          "Rewrite the next decision meeting as three roles and one question.",
-          "Add a stop-rule: the decision does not proceed if the affected role is absent.",
-          "Draft the one-paragraph close you will send afterward."
+        "practice": [
+          "Mark what the committee loses by accepting the rank.",
+          "Write the question you would ask before anyone is cut.",
+          "Name who has to be in that fifteen minutes."
         ],
-        prompt: 'What does the chapter say it takes for a different perspective to change a decision, not merely attend? Describe one meeting you will redesign because of a passage you marked.',
-        check: {
-          q: "Integration has happened when…",
-          options: ["Attendance was diverse", "A perspective changed the decision", "The slide deck thanked everyone"],
-          answer: 1
+        "prompt": "Retell the Candidate Seven scene and the decision the book says most committees make. What would Chapter 4 require before your own team treats a score as a decision?",
+        "check": {
+          "q": "Chapter 4 says a ranked AI list should be treated as…",
+          "options": [
+            "The decision, because it processed more data than the room",
+            "An opinion the room still has to interpret, especially for the person the score buries",
+            "Something only the data team may discuss"
+          ],
+          "answer": 1
         }
       }
     ]
   },
   {
-    id: 3, weeks: "5–6", title: "Participatory Sensemaking",
-    construct: "PS",
-    summary: "Interpret ambiguity together, especially when an AI system produces an answer nobody can fully explain.",
-    lessons: [
+    "id": 3,
+    "weeks": "5–6",
+    "title": "Voice, then the cases",
+    "construct": "Part One into Part Two",
+    "summary": "Chapter 5 on the nurse and the alert. Chapter 6’s five organizations, read as evidence of how the theory behaves.",
+    "lessons": [
       {
-        id: "3a", week: 5, minutes: 45, title: "More than one reading",
-        aim: "Treat competing interpretations as the work, not as a delay.",
-        reading: 'Read Chapter 5. Mark the method the book gives for holding more than one reading of an event. Copy the chapter title as printed.',
-        teach: [
-          "Sensemaking is what a group does when the facts do not yet mean one thing. Participatory Sensemaking insists that the official narrative is one reading, not the reading. Frontline observation counts as evidence, not color commentary.",
-          "Leaders usually collapse ambiguity too early because a single story feels like control. The cost shows up later as surprise. The people who could have named the surprise were in the building.",
-          "A usable method is short. Put the event on the wall. Ask for three readings: what management thinks happened, what the people closest to the work think happened, and what would have to be true for each to be right. Do not vote. Decide which reading you will test."
+        "id": "3a",
+        "week": 5,
+        "minutes": 60,
+        "title": "Humans and Machines Share the Work",
+        "aim": "Use the Room 412 scene. Trust in the model and trust in the organization are not the same thing.",
+        "reading": "Read Chapter 5, “Communication When Humans and Machines Share the Work,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 87. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "A nurse gets an alert: high probability of cardiac arrest. The patient is awake and complaining about the cafeteria. Blind trust is automation bias. Dismissal is algorithmic aversion.",
+          "The chapter’s third path is the one that depends on whether she can raise the conflict. Communication here is whether a person can say the model and the room disagree."
         ],
-        practice: [
-          "Pick a recent surprise: a missed target, a resignation cluster, a model result nobody expected.",
-          "Write the official reading and one rival reading.",
-          "Name the smallest test that would tell you which is closer."
+        "practice": [
+          "Mark the two failures the scene names.",
+          "Write what your organization does when a person contradicts a score.",
+          "Draft the sentence you want someone to be able to say."
         ],
-        prompt: 'What method does the chapter give for holding more than one reading? Apply it to a surprise your team still explains in only one way.',
-        check: {
-          q: "Participatory sensemaking asks a team to…",
-          options: ["Pick a story quickly so work can resume", "Hold more than one interpretation long enough to test it", "Defer every decision to the most senior person"],
-          answer: 1
+        "prompt": "What are the two failures in the Room 412 opening, and what does the chapter say has to be true for a person to take the third path? Where would that sentence be punished in your organization?",
+        "check": {
+          "q": "Chapter 5’s nurse scene is about…",
+          "options": [
+            "Teaching clinicians to obey the alert",
+            "The difference between trusting the model and trusting the organization enough to challenge it",
+            "Replacing clinical judgment with a better threshold"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "3b", week: 6, minutes: 45, title: "When the model is a black box",
-        aim: "Build a habit for interpreting AI output instead of obeying it.",
-        reading: 'Read Chapter 6. Mark how the book tells a leader to treat an AI result nobody can fully explain. Copy the chapter title as printed.',
-        teach: [
-          "An algorithmic recommendation is an ambiguous object. It has a score and almost no story. AILT’s claim is that diverse teams must interpret that output together, because no single role can see who the score misreads.",
-          "Do not start with “do we trust the vendor.” Start with a case. One real person the system would rank, reject, schedule, or flag. Ask the room: what does the system think it knows, what can it not know, and who is absent from the training history.",
-          "Intellectual humility is a leadership behavior here. Say what you do not know about the model before you ask anyone else to."
+        "id": "3b",
+        "week": 6,
+        "minutes": 75,
+        "title": "Five Cases",
+        "aim": "Read the cases as tests of the theory, not as success stories.",
+        "reading": "Read Chapter 6, “Case Studies of Adaptive Inclusive Leadership,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, including Synergistic Solutions, Global Dynamics, InnovateTech, GreenTech Solutions, and Community Connect. It begins on page 109. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The book says the five were chosen on purpose: a technology merger, pharmaceutical talent, an AI-era conflict, innovation in a hierarchy, and a nonprofit that had been deciding for its neighborhood.",
+          "Do not stop at the stories. The chapter closes on patterns: the inclusion-speed tradeoff, psychological safety as the turn, constructs that never work alone, structure rather than intent, and the need to keep recalibrating."
         ],
-        practice: [
-          "Choose one AI output your team might act on.",
-          "Write three questions the output cannot answer.",
-          "Assign who must be in the room before anyone acts on it."
+        "practice": [
+          "Read all five, including the discussion after each.",
+          "Pick the case closest to your organization and mark the turn.",
+          "Write which of the five closing patterns you are living."
         ],
-        prompt: 'How does the book tell a leader to treat an AI output nobody can fully explain? Name one output your organization might obey, and the question the chapter says to ask first.',
-        check: {
-          q: "A black-box recommendation should be treated as…",
-          options: ["A decision", "An ambiguous object that still needs interpretation", "Something only the data team may discuss"],
-          answer: 1
+        "prompt": "Choose one case. What was the challenge in the book’s words, what actually changed, and which closing pattern does your organization currently fail? Cite the page.",
+        "check": {
+          "q": "Chapter 6’s cases are in the book in order to show that…",
+          "options": [
+            "One heroic leader can install the theory",
+            "The same capacities show up across a merger, a lab, a product company, a green firm, and a nonprofit, and they do not work alone",
+            "Culture work is only a corporate problem"
+          ],
+          "answer": 1
         }
       }
     ]
   },
   {
-    id: 4, weeks: "7–8", title: "Equity-Centered Flexibility",
-    construct: "ECF",
-    summary: "Change the plan when the burden is uneven. Equity is a design constraint during the change, not a review after it.",
-    lessons: [
+    "id": 4,
+    "weeks": "7–8",
+    "title": "Tools, then the evidence",
+    "construct": "Part Two",
+    "summary": "Chapter 7’s instruments, then the method and the findings of the systematic evidence review.",
+    "lessons": [
       {
-        id: "4a", week: 7, minutes: 45, title: "Who pays for the change",
-        aim: "See differential impact before the rollout, not in the exit interviews.",
-        reading: 'Read Chapter 7. Mark how the book asks you to see who carries the cost of a change. Copy the chapter title as printed.',
-        teach: [
-          "Flexibility that ignores equity is just speed for the people already comfortable. Equity-Centered Flexibility asks a prior question: who carries the cost of this change, in time, risk, status, or income, and was that cost chosen or dumped.",
-          "The same policy is not the same experience. A return-to-office rule, a new scheduling model, an AI screen on applications. The average outcome can look fine while one group absorbs the harm.",
-          "The move is concrete. Before you lock the plan, name three groups and write the burden for each. If you cannot name the groups, you are not ready to call the change equitable."
+        "id": "4a",
+        "week": 7,
+        "minutes": 70,
+        "title": "Practical Tools",
+        "aim": "Use Chapter 7 on yourself. The tool is not the point. The gap is.",
+        "reading": "Read Chapter 7, “Practical Tools and Techniques,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, and begin Appendix A, the AILT assessment, which starts on page 325. Chapter 7 begins on page 133. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The chapter refuses a passive reading. It asks for self-assessment: strengths, the AI-specific questions about who designs and evaluates a system, and what you do with a recommendation you cannot explain.",
+          "Appendix A is the longer instrument. Use it as the book offers it, a diagnosis, not a score to post."
         ],
-        practice: [
-          "Take a change already in motion.",
-          "Name three groups and the specific burden for each.",
-          "Circle the burden that is currently invisible to the steering group."
+        "practice": [
+          "Complete the self-assessment in the chapter.",
+          "Answer the AI-specific questions in writing.",
+          "Start Appendix A and mark the items you wanted to skip."
         ],
-        prompt: 'How does the chapter ask you to see who pays for a change? Name three groups and the burden the book trained you to look for.',
-        check: {
-          q: "Equity-centered flexibility begins by…",
-          options: ["Measuring average satisfaction", "Naming who carries the uneven cost", "Publishing a diversity statement"],
-          answer: 1
+        "prompt": "What did Chapter 7’s assessment show that you already do, and what did it show you skip when the subject is an AI system? Quote the item, not your impression of it.",
+        "check": {
+          "q": "Chapter 7 says the practical work starts with…",
+          "options": [
+            "A new organization chart",
+            "An honest reading of your own AILT practice, including how you govern AI",
+            "A vendor’s maturity score"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "4b", week: 8, minutes: 45, title: "Redesign, don’t apologize",
-        aim: "Change the structure when the burden is unjust, instead of explaining it.",
-        reading: 'Read Chapter 8. Mark what the book says to do after an uneven impact is visible. Copy the chapter title as printed.',
-        teach: [
-          "AILT does not treat equity as a speech after the decision. If a change disproportionately burdens a group, the flexible act is to adjust the change. Access to tools and training is part of the change, not a perk for people who already have time.",
-          "Hold yourself to a sentence you can be checked on: “We will not ship this until group X can actually use it, appeal it, or refuse it without penalty.”",
-          "Then watch the system after launch. Differential outcomes are an operations metric. Who gets flagged, slowed, cut, or passed over. Review it on a cadence, with the people affected in the review."
+        "id": "4b",
+        "week": 8,
+        "minutes": 80,
+        "title": "Method and Findings",
+        "aim": "Read how the book builds the evidence, then what it claims each proposition can bear.",
+        "reading": "Read Chapter 8, “Systematic Evidence Review: Methodology,” beginning on page 157, and Chapter 9, “Systematic Evidence Review: Findings,” beginning on page 175. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "Chapter 8 is explicit: AILT is not standing on one study. The review looks for convergence across meta-analyses and other programs. The preface already said the constructs have not yet been measured together in primary research.",
+          "Chapter 9 takes the five predictions one at a time, starting with the claim that inclusive and adaptive capacities constitute each other. Read the strength the book is willing to claim, not only the studies it likes."
         ],
-        practice: [
-          "Write the sentence you will not ship without.",
-          "Name the metric you will watch, and how often.",
-          "Name who can stop the rollout, and that it is not only the sponsor."
+        "practice": [
+          "Write what Chapter 8 says a systematic review can and cannot prove.",
+          "In Chapter 9, mark the proposition with the thinnest evidence.",
+          "Note one finding you would not repeat in a meeting until you had reread the page."
         ],
-        prompt: 'What does the book say to do once an uneven impact is visible? Put that standard in your own words and name one change you will not ship until it meets the page.',
-        check: {
-          q: "After an uneven impact is visible, ECF asks you to…",
-          options: ["Explain why the average is still good", "Adjust the change", "Wait for the annual report"],
-          answer: 1
+        "prompt": "In your own words, why does Chapter 8 refuse to rest the theory on a single study? Then take one proposition from Chapter 9 and say what the book treats as shown, and what it does not yet show.",
+        "check": {
+          "q": "The evidence review in Chapters 8 and 9 is…",
+          "options": [
+            "A new experiment that measured AILT directly",
+            "A reading of converging studies, with Chapter 9 testing the five predictions one by one",
+            "A list of companies that adopted the theory"
+          ],
+          "answer": 1
         }
       }
     ]
   },
   {
-    id: 5, weeks: "9–10", title: "AILT and AI Governance",
-    construct: "Governance",
-    summary: "Lead the system that chooses, tests, and can refuse an AI tool. Governance is a leadership practice, not a policy PDF.",
-    lessons: [
+    "id": 5,
+    "weeks": "9–10",
+    "title": "From the page to the organization",
+    "construct": "Part Two into Part Three",
+    "summary": "Chapter 10 on what the pattern does and does not prove. Then Chapters 11 and 12: build it, and become the leader the theory requires.",
+    "lessons": [
       {
-        id: "5a", week: 9, minutes: 50, title: "Govern the system",
-        aim: "Install a minimum governance loop before another tool goes live.",
-        reading: 'Read Chapters 9 and 10. Mark the governance questions the book insists on before a tool is live. Copy both chapter titles as printed.',
-        teach: [
-          "AI governance fails when it is a committee of titles reviewing a slide after procurement has already signed. AILT’s loop is smaller and earlier. Who proposes the tool. Who is affected. Who can interpret a strange output. Who can stop it. Who is accountable when it harms someone.",
-          "Five questions cover most of the risk. Who decided. Who was missing. What was tested across groups. Where can a person appeal. What happens to the person who reports a bad result.",
-          "If any answer is “the vendor,” you do not have governance. You have a subscription."
+        "id": "5a",
+        "week": 9,
+        "minutes": 70,
+        "title": "Discussion and Synthesis",
+        "aim": "Leave Chapter 10 able to say both the pattern and the limit.",
+        "reading": "Read Chapter 10, “Systematic Evidence Review: Discussion and Synthesis,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 199. This is the chapter the preface points to for the research agenda. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The chapter’s claim is convergence: inclusive leadership, psychological safety, diversity and performance, shared leadership, and the AI cases point the same direction.",
+          "Read the limit as carefully as the claim. A young theory can be honest. Write down what Chapter 10 says still has to be measured, and what a leader is still responsible for before that measurement exists."
         ],
-        practice: [
-          "Pick one tool already in use.",
-          "Answer the five questions in one line each.",
-          "Mark the answer you are least willing to say out loud. That is the work."
+        "practice": [
+          "Mark the sentence that says the pattern is too consistent to dismiss.",
+          "Mark the limitation you are most tempted to skip.",
+          "Write the research question the chapter leaves open that your organization is already living."
         ],
-        prompt: 'What governance questions does the book insist on before a tool is live? Answer them for one tool you use, and mark the answer the chapter would not accept.',
-        check: {
-          q: "Governance is missing when…",
-          options: ["The vendor’s contract is signed", "No one affected can stop or appeal the system", "The tool has a name"],
-          answer: 1
+        "prompt": "What does Chapter 10 say the evidence converges on, and what does it refuse to claim? How should that limit change the way you talk about AILT at work?",
+        "check": {
+          "q": "Chapter 10’s stance toward the evidence is…",
+          "options": [
+            "The theory is proven and finished",
+            "The pattern is strong and consistent, and the constructs still need direct measurement",
+            "Industry research is the only evidence that counts"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "5b", week: 10, minutes: 50, title: "What the cases already taught",
-        aim: "Use known failures as design constraints, not as headlines.",
-        reading: 'Read Chapters 11 and 12. If the Amazon résumé screener, iTutorGroup, or Workday pages fell earlier, reread them and use those pages. Copy the chapter titles as printed.',
-        teach: [
-          "Amazon’s resume screener learned the company’s past and then preferred it. The lesson for IAC: a model trained on a narrow history will reproduce that history unless different people are allowed to reject the pattern.",
-          "The EEOC’s case against iTutorGroup, and litigation around Workday’s screening tools, make the same point in legal language. If a tool sorts people, the employer owns the sorting. “The software did it” is not a leadership position.",
-          "An and colleagues’ 2025 work in PNAS Nexus adds the research version: models can systematically disadvantage applicants. Sensemaking and equity checks are not optional extras on top of a clever pilot. They are how you avoid becoming the next example."
+        "id": "5b",
+        "week": 10,
+        "minutes": 80,
+        "title": "Build It, and Be the Leader",
+        "aim": "Chapters 11 and 12 move from the literature to the building and the person.",
+        "reading": "Read Chapter 11, “Building It, From Theory to Organizational Practice,” beginning on page 221, and Chapter 12, “The Leader AILT Requires,” beginning on page 245. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "Chapter 11 starts with readiness: where the organization is, not where the values statement says it is. In the AI section, look for equity audits with the people affected in the room, and a place where any level can interpret a strange output.",
+          "Chapter 12 says this does not make you a data scientist. It asks whether you can ask what the system was trained on, who is missing, and what you will do when the answer is inconvenient. Self-awareness, including your own bias, is the start."
         ],
-        practice: [
-          "Write the one-sentence lesson from these cases for your organization.",
-          "Name the system you would not want read aloud in a hearing.",
-          "Add one control this month: a test across groups, an appeal path, or a refusal right."
+        "practice": [
+          "Score your organization’s readiness in the book’s terms, not yours.",
+          "Write the three questions Chapter 12 says a leader must be able to ask of a model.",
+          "Name the bias you would rather not put in the journal."
         ],
-        prompt: 'Using the cases in these chapters, what does the book say the organization owns when a tool sorts people? Name the system you would not want read aloud, and the control the pages imply.',
-        check: {
-          q: "The leadership lesson of the hiring-tool cases is…",
-          options: ["Buy a better vendor", "The organization owns the sorting the tool does", "Bias is only a technical bug"],
-          answer: 1
+        "prompt": "From Chapter 11, where is your organization actually, as opposed to the values statement? From Chapter 12, which practice do you not yet have, and what will you do in the next month because of that page?",
+        "check": {
+          "q": "Chapter 12 says the leader AILT requires must…",
+          "options": [
+            "Become the data scientist",
+            "Know enough to ask what the system was trained on, who is missing, and what happens when the answer is unwelcome",
+            "Delegate AI questions to procurement"
+          ],
+          "answer": 1
         }
       }
     ]
   },
   {
-    id: 6, weeks: "11–12", title: "Capstone",
-    construct: "Your plan",
-    summary: "Read your own pattern and leave with a development plan someone else could hold you to.",
-    lessons: [
+    "id": 6,
+    "weeks": "11–12",
+    "title": "What will go wrong, and the path",
+    "construct": "Part Three",
+    "summary": "Chapters 13 and 14 on resistance and on sector. Chapter 15 and the appendices close the book into a plan someone can see.",
+    "lessons": [
       {
-        id: "6a", week: 11, minutes: 50, title: "Read your pattern",
-        aim: "See which construct you practice and which you skip.",
-        reading: 'Read Chapters 13 and 14. Complete the book’s assessment if it falls here. If the assessment sits elsewhere, complete it this week and write from those items. Copy the chapter titles as printed.',
-        teach: [
-          "Look back at what you wrote. Leaders usually over-identify with one construct. Some are excellent at inviting voices and unwilling to change the plan. Some will redesign for equity and never let the room interpret the model. Some love the framework and have never made it safe to disagree with them.",
-          "Use the tools you already have. The self-assessment is forty items across IAC, participatory sensemaking, equity-centered flexibility, and psychological safety. The 360 shows the gap between your score and the team’s. Disagreement there is data, not an insult.",
-          "Pick one construct. Not three. A plan that starts everywhere ends nowhere."
+        "id": "6a",
+        "week": 11,
+        "minutes": 80,
+        "title": "Obstacles and Other Rooms",
+        "aim": "Read the failure modes before you write a plan that assumes goodwill.",
+        "reading": "Read Chapter 13, “What Will Go Wrong, And How to Navigate It,” beginning on page 267, and Chapter 14, “AILT Across Sectors and Cultures,” beginning on page 289. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "Chapter 13 says the principles will meet resistance, some of it from places you do not expect. AI adds fear of displacement, distrust of the score, and fatigue at the pace. Bias is not removed by automating the decision. It is encoded.",
+          "Chapter 14 refuses one design for every room. A startup, a hospital triage model, a nonprofit, and a government agency do not carry the same risk. Read the sector closest to you, and one that is not."
         ],
-        practice: [
-          "Score yourself honestly, 1 to 5, on IAC, sensemaking, equity-centered flexibility, and safety.",
-          "Ask one person who will not flatter you to score the same four.",
-          "Write the gap in a sentence that does not blame them."
+        "practice": [
+          "List the resistance Chapter 13 names that you have already heard.",
+          "From Chapter 14, write how your sector changes the theory.",
+          "Write the obstacle you have been calling a communication problem."
         ],
-        prompt: 'Using the book’s assessment or the pattern across the chapters you have read, which capacity do you practice and which do you skip? Write the gap in a sentence that names the chapter that convinced you.',
-        check: {
-          q: "The capstone asks you to develop…",
-          options: ["All four areas at once", "One construct you can be held to", "A longer slide about the theory"],
-          answer: 1
+        "prompt": "Which obstacle in Chapter 13 is already in your organization, in the book’s language rather than yours? How does Chapter 14 say your sector must change the way AILT is practiced?",
+        "check": {
+          "q": "Chapters 13 and 14 argue that implementation fails when leaders…",
+          "options": [
+            "Find a sector where the theory needs no translation",
+            "Ignore resistance, and treat a hospital, a firm, a nonprofit, and an agency as the same room",
+            "Wait for a perfect culture before they begin"
+          ],
+          "answer": 1
         }
       },
       {
-        id: "6b", week: 12, minutes: 50, title: "A plan someone can see",
-        aim: "Leave with three actions, a witness, and a date.",
-        reading: 'Read Chapter 15 and every For Your Organization section you have not already used in a journal. Copy the chapter title as printed.',
-        teach: [
-          "A personal AILT plan is not a vision statement. It is three moves inside the work you already have. One behavior you will start. One meeting you will redesign. One system you will not let ship unchanged.",
-          "Each move needs a witness who is not you, a date inside thirty days, and a sign that it happened. “I will be more inclusive” is not a sign. “The appeal path is written and the affected team has seen it” is.",
-          "Then tell the truth about the cost. Inclusive adaptation is slower at the start. The theory’s claim is that it is less blind afterward. Say that to the person who wants the pilot live on Friday."
+        "id": "6b",
+        "week": 12,
+        "minutes": 90,
+        "title": "The Path Forward",
+        "aim": "Close on Chapter 15. The journal is the plan, tied to pages you have already read.",
+        "reading": "Read Chapter 15, “Conclusion and the Path Forward,” beginning on page 311. Then use Appendix B or Appendix C, pages 341 and 357, for any case or study you still need. Reread the preface question before you write. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "teach": [
+          "The book opens on an algorithm that learned to discriminate and closes on a choice about the organization you will build. The conclusion says the cost of failing both capacities shows up in performance, talent, equity, and the law.",
+          "A plan that does not cite a page is a wish. Three moves, each tied to a chapter you actually read, a witness, and a date."
         ],
-        practice: [
-          "Write the three moves in one line each.",
-          "Name the witness and the date for each.",
-          "Write the sentence you will say when someone calls this a delay."
+        "practice": [
+          "Reread the last pages of Chapter 15.",
+          "Pull one page from earlier in the book that you are still avoiding.",
+          "Write the three moves before you open the journal box."
         ],
-        prompt: 'From Chapter 15 and the For Your Organization sections, write three moves. Tie each one to a page. Name a witness and a date. This journal is the plan.',
-        check: {
-          q: "A finished plan is real when…",
-          options: ["It inspires you", "Someone else can tell whether you did it", "It mentions all three constructs by name"],
-          answer: 1
+        "prompt": "From Chapter 15, what choice does the book leave you? Write three moves. Tie each one to a chapter and a page. Name a witness and a date. This journal is the plan.",
+        "check": {
+          "q": "A finished reading of this book shows up as…",
+          "options": [
+            "A feeling that the theory is inspiring",
+            "Three moves someone else can check, each tied to a page",
+            "A summary of all fifteen chapters in one paragraph"
+          ],
+          "answer": 1
         }
       }
     ]

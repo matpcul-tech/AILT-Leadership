@@ -1065,7 +1065,7 @@ export default function AILTSite() {
 
         <section id="course" style={{ padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTitle tag="12-Week Program" title="Read the Book. Write from It." sub="Twelve weeks through Leadership for the Age of AI. Each week assigns the next chapters. A week counts only when the journal names the chapter as printed, cites a page, and uses that passage." />
+            <SectionTitle tag="12-Week Program" title="Read the Book. Write from It." sub="Twelve weeks through Adaptive Inclusive Leadership Theory. Each week uses the chapter titles from the book. A week counts only when the journal cites the page and uses the passage." />
             <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {[
                 {n:1,t:"Foundations of AILT",w:"1-2",d:"The case for integrating adaptability and inclusivity. Psychological safety as the foundation."},
