@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { Program } from "./program.jsx";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
 
@@ -244,24 +245,34 @@ const TOOLS = [
 ];
 
 async function callAPI(sys, prompt, maxTok = 1000) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages: [{ role: "user", content: prompt }] }),
-  });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error.message);
+  let res;
+  try {
+    res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages: [{ role: "user", content: prompt }] }),
+    });
+  } catch {
+    throw new Error("This tool cannot reach a model from the browser. The 12-week program and the self-assessment work without one.");
+  }
+  const data = await res.json().catch(() => ({}));
+  if (data.error) throw new Error("The model did not answer. Use the 12-week program, which stays on this device. " + data.error.message);
   return data.content?.map(b => b.text || "").join("\n") || "No response.";
 }
 
 async function callAPIHistory(sys, messages, maxTok = 600) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages }),
-  });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error.message);
+  let res;
+  try {
+    res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTok, system: sys, messages }),
+    });
+  } catch {
+    throw new Error("This tool cannot reach a model from the browser. The 12-week program and the self-assessment work without one.");
+  }
+  const data = await res.json().catch(() => ({}));
+  if (data.error) throw new Error("The model did not answer. Use the 12-week program, which stays on this device. " + data.error.message);
   return data.content?.map(b => b.text || "").join("\n") || "No response.";
 }
 
@@ -855,6 +866,7 @@ function FeedbackTool({ onBack }) {
 
 export default function AILTSite() {
   const [page, setPage] = useState("home");
+  const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [contact, setContact] = useState({ name: "", email: "", msg: "" });
   const [contactSent, setContactSent] = useState(false);
@@ -893,20 +905,23 @@ export default function AILTSite() {
   if (page==="scanner")    return W(<ScannerTool onBack={back} />);
   if (page==="coach")      return W(<CoachTool onBack={back} />);
   if (page==="360")        return W(<FeedbackTool onBack={back} />);
+  if (page==="program")    return <Program onBack={back} />;
 
   return (
-    <div style={{ height: "100vh", overflow: "hidden", background: D, color: L, fontFamily: "'Outfit',sans-serif" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled?D+"ee":"transparent", backdropFilter: scrolled?"blur(20px)":"none", borderBottom: scrolled?`1px solid ${G}15`:"none", transition: "all 0.4s", padding: "0 40px" }}>
+    <div className="ailt-page" style={{ height: "100vh", overflow: "hidden", background: D, color: L, fontFamily: "'Outfit',sans-serif" }}>
+      <nav className="ailt-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled?D+"ee":"transparent", backdropFilter: scrolled?"blur(20px)":"none", borderBottom: scrolled?`1px solid ${G}15`:"none", transition: "all 0.4s", padding: "0 40px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setPage("home"); if(mainRef.current) mainRef.current.scrollTop=0; }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setMenu(false); setPage("home"); if(mainRef.current) mainRef.current.scrollTop=0; }}>
             <div style={{ width: 32, height: 32, borderRadius: 8, background: `linear-gradient(135deg,${G},#8b6914)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 800, color: D }}>A</div>
             <span style={{ fontSize: 15, fontWeight: 700, color: L }}>AILT</span>
           </div>
-          <div style={{ display: "flex", gap: 4 }}>
+          <button className="ailt-burger" aria-label="Open menu" onClick={() => setMenu(m => !m)} style={{ display: "none", background: "none", border: `1px solid ${G}55`, color: L, borderRadius: 8, padding: "8px 12px", fontSize: 13, fontWeight: 600 }}>{menu ? "Close" : "Menu"}</button>
+          <div className={"ailt-nav-links" + (menu ? " open" : "")} style={{ display: "flex", gap: 4, alignItems: "center" }}>
             {["theory","evidence","book","tools","course","about","contact"].map(n => (
-              <button key={n} onClick={() => go(n)} style={{ background: "none", border: "none", color: T, fontSize: 12, fontWeight: 600, padding: "8px 10px", cursor: "pointer", textTransform: "capitalize" }}>{n}</button>
+              <button key={n} onClick={() => { setMenu(false); go(n); }} style={{ background: "none", border: "none", color: T, fontSize: 12, fontWeight: 600, padding: "8px 10px", cursor: "pointer", textTransform: "capitalize" }}>{n}</button>
             ))}
-            <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ background:`linear-gradient(135deg,${G},#a88a28)`, color: D, padding: "8px 18px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none", marginLeft: 8 }}>Buy Book →</a>
+            <button onClick={() => { setMenu(false); setPage("program"); }} style={{ background:`linear-gradient(135deg,${G},#a88a28)`, color: D, padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer", marginLeft: 4 }}>Program</button>
+            <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>Buy Book</a>
           </div>
         </div>
       </nav>
@@ -916,17 +931,17 @@ export default function AILTSite() {
           <div style={{ position: "absolute", top: "-20%", right: "-10%", width: 600, height: 600, background: `radial-gradient(circle,${G}08 0%,transparent 70%)`, pointerEvents: "none" }} />
           <div style={{ textAlign: "center", maxWidth: 800, position: "relative", zIndex: 1 }}>
             <FI><div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, color: G, textTransform: "uppercase", marginBottom: 16 }}>Adaptive Inclusive Leadership Theory</div></FI>
-            <FI delay={0.15}><h1 style={{ fontSize: 48, fontWeight: 300, color: L, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1.15, marginBottom: 20 }}>Leadership for the<br /><span style={{ fontWeight: 700, fontStyle: "italic" }}>Age of AI</span></h1></FI>
+            <FI delay={0.15}><h1 className="ailt-hero-title" style={{ fontSize: 48, fontWeight: 300, color: L, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1.15, marginBottom: 20 }}>Leadership for the<br /><span style={{ fontWeight: 700, fontStyle: "italic" }}>Age of AI</span></h1></FI>
             <FI delay={0.3}><p style={{ fontSize: 17, color: T, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 32px" }}>When algorithms make decisions that were once exclusively human, organizations need a framework that governs transformation equitably.</p></FI>
             <FI delay={0.45}><div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <button onClick={() => go("tools")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Explore the Tools</button>
+              <button onClick={() => setPage("program")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Begin the course</button>
               <button onClick={() => go("theory")} style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Learn the Theory</button>
             </div></FI>
           </div>
         </section>
 
         <section style={{ background: D2, borderTop: `1px solid ${G}10`, borderBottom: `1px solid ${G}10`, padding: "36px 40px" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, textAlign: "center" }}>
+          <div className="g4" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, textAlign: "center" }}>
             {[{n:"39948",s:"+",l:"Participants in evidence base"},{n:"105",s:"",l:"Independent samples"},{n:"5",s:"",l:"Testable propositions"},{n:"541",s:"",l:"Verified references"}].map((s,i)=>(
               <FI key={i} delay={i*0.1}>
                 <div style={{ fontSize: 28, fontWeight: 700, color: G, fontFamily: "'Cormorant Garamond',serif" }}><AnimNum value={s.n} suffix={s.s} /></div>
@@ -938,7 +953,7 @@ export default function AILTSite() {
 
         <section id="theory" style={{ padding: "100px 40px", maxWidth: 1100, margin: "0 auto" }}>
           <SectionTitle tag="The Framework" title="Three Constructs, One Mediating Mechanism" sub="Adaptability and inclusivity are interdependent capacities with psychological safety as the bridge." />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
+          <div className="g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
             {[
               {tag:"Construct 1",t:"Inclusive Adaptive Capacity",a:"IAC",c:"#2563eb",lv:"Organizational",d:"Responding to complex challenges by integrating diverse perspectives. In the AI age: ensuring diverse stakeholders govern AI systems."},
               {tag:"Construct 2",t:"Participatory Sensemaking",a:"PS",c:"#0d9488",lv:"Team",d:"Collective interpretation of ambiguity. When AI produces opaque recommendations, diverse teams must interpret outputs together."},
@@ -960,7 +975,7 @@ export default function AILTSite() {
         <section id="evidence" style={{ background: D2, padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTitle tag="The Evidence" title="Built on Real Research" sub="Every claim grounded in verified meta-analyses and published research." />
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+            <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {[
                 {c:"Li, Ling, & Zhu (2025)",s:"Asia Pacific J. of Management",st:"105 samples, N=39,948",f:"Inclusive leadership predicts performance, innovation, creativity, voice."},
                 {c:"Frazier et al. (2017)",s:"Personnel Psychology",st:"136 samples, N>22,000",f:"Psychological safety meta-analysis confirming its role as enabler."},
@@ -982,7 +997,7 @@ export default function AILTSite() {
         <section id="book" style={{ padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTitle tag="The Book" title="Leadership for the Age of AI" sub="73,000 words of theory, evidence, case studies, and practical application." />
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
+            <div className="g2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
               <FI><div style={{ background: `linear-gradient(135deg,${D2},${D3})`, border: `1px solid ${G}20`, borderRadius: 16, padding: 40, textAlign: "center" }}>
                 <div style={{ background:"linear-gradient(160deg,#07090d 0%,#151b26 60%,#0c1018 100%)", border:"1px solid #c8a43430", borderRadius:16, padding:"40px 32px", textAlign:"center", position:"relative", overflow:"hidden", boxShadow:"0 24px 80px rgba(0,0,0,0.6)" }}>
                   <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:"linear-gradient(90deg,#c8a434,#8b6914)" }} />
@@ -1027,7 +1042,7 @@ export default function AILTSite() {
         <section id="tools" style={{ background: D2, padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTitle tag="Adaptive AI Suite" title="Leadership Tools Powered by AILT" sub="Six tools designed for leaders, consultants, and organizations navigating AI-driven transformation." />
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+            <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {TOOLS.map((t,i)=>(
                 <FI key={i} delay={i*0.08}>
                   <button onClick={() => setPage(t.id)} style={{ background: D3, border: `1px solid ${G}15`, borderRadius: 12, padding: 24, cursor: "pointer", textAlign: "left", width: "100%", transition: "all 0.25s", position: "relative", overflow: "hidden" }}
@@ -1051,7 +1066,7 @@ export default function AILTSite() {
         <section id="course" style={{ padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTitle tag="12-Week Program" title="AILT Leadership Course" sub="Professional development designed to build all three AILT constructs through structured practice, reflection, and peer learning." />
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+            <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {[
                 {n:1,t:"Foundations of AILT",w:"1-2",d:"The case for integrating adaptability and inclusivity. Psychological safety as the foundation."},
                 {n:2,t:"Inclusive Adaptive Capacity",w:"3-4",d:"Technical vs adaptive challenges. Building cognitive flexibility and diverse integration."},
@@ -1060,17 +1075,23 @@ export default function AILTSite() {
                 {n:5,t:"AILT and AI Governance",w:"9-10",d:"Leading AI transformation with AILT. Sustaining inclusive governance in changing landscapes."},
                 {n:6,t:"Capstone",w:"11-12",d:"Integration, 360 assessment, peer feedback, and personal AILT leadership development plan."},
               ].map((m,i)=>(
-                <FI key={i} delay={i*0.08}><Card style={{ height: "100%", position: "relative", overflow: "hidden" }}>
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${G},#a88a28)` }} />
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: G, textTransform: "uppercase", marginBottom: 4 }}>Module {m.n}</div>
-                  <div style={{ fontSize: 10, color: T, marginBottom: 10 }}>Weeks {m.w}</div>
-                  <h3 style={{ fontSize: 15, fontWeight: 700, color: L, marginBottom: 8 }}>{m.t}</h3>
-                  <p style={{ fontSize: 12, color: T, lineHeight: 1.6 }}>{m.d}</p>
-                </Card></FI>
+                <FI key={i} delay={i*0.08}>
+                  <button onClick={() => setPage("program")} style={{ background: "transparent", border: "none", padding: 0, width: "100%", textAlign: "left", color: "inherit", cursor: "pointer" }}>
+                    <Card style={{ height: "100%", position: "relative", overflow: "hidden" }}>
+                      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${G},#a88a28)` }} />
+                      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: G, textTransform: "uppercase", marginBottom: 4 }}>Module {m.n}</div>
+                      <div style={{ fontSize: 10, color: T, marginBottom: 10 }}>Weeks {m.w}</div>
+                      <h3 style={{ fontSize: 15, fontWeight: 700, color: L, marginBottom: 8 }}>{m.t}</h3>
+                      <p style={{ fontSize: 12, color: T, lineHeight: 1.6 }}>{m.d}</p>
+                      <div style={{ marginTop: 14, fontSize: 12, fontWeight: 700, color: G }}>Open module →</div>
+                    </Card>
+                  </button>
+                </FI>
               ))}
             </div>
-            <FI delay={0.5}><div style={{ textAlign: "center", marginTop: 40 }}>
-              <button onClick={() => go("contact")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Inquire About Enrollment</button>
+            <FI delay={0.5}><div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 40 }}>
+              <button onClick={() => setPage("program")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Start the 12-week program</button>
+              <button onClick={() => go("contact")} style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Inquire About Enrollment</button>
             </div></FI>
           </div>
         </section>
@@ -1128,7 +1149,7 @@ export default function AILTSite() {
           </div>
         </section>
 
-        <footer style={{ borderTop: `1px solid ${G}10`, padding: "24px 40px" }}>
+        <footer className="ailt-footer" style={{ borderTop: `1px solid ${G}10`, padding: "24px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ width: 28, height: 28, borderRadius: 7, background: `linear-gradient(135deg,${G},#8b6914)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, color: D }}>A</div>
@@ -1146,6 +1167,29 @@ export default function AILTSite() {
         input::placeholder,textarea::placeholder{color:#3a4252}
         ::selection{background:${G}30;color:${L}}
         select option{background:#0c1018}
+        @media (max-width: 860px) {
+          .ailt-burger { display: inline-flex !important; align-items: center; }
+          .ailt-nav { padding: 0 16px !important; }
+          .ailt-nav-links { display: none !important; }
+          .ailt-nav-links.open {
+            display: flex !important;
+            flex-direction: column;
+            align-items: stretch !important;
+            position: absolute;
+            top: 64px; left: 0; right: 0;
+            background: #07090df2;
+            padding: 8px 16px 16px;
+            border-bottom: 1px solid #c8a43433;
+          }
+          .ailt-nav-links.open button, .ailt-nav-links.open a { text-align: left; padding: 12px 8px !important; font-size: 15px !important; margin: 0 !important; }
+          .ailt-page section, .ailt-page footer { padding-left: 20px !important; padding-right: 20px !important; }
+          .g2, .g3, .g4 { grid-template-columns: 1fr !important; }
+          .ailt-hero-title { font-size: 36px !important; }
+          .ailt-footer > div { flex-direction: column !important; gap: 10px; text-align: center; }
+        }
+        @media (min-width: 861px) and (max-width: 1100px) {
+          .g3, .g4 { grid-template-columns: 1fr 1fr !important; }
+        }
       `}</style>
     </div>
   );
