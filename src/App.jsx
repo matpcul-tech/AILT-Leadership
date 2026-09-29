@@ -23,17 +23,8 @@ function FI({ children, delay = 0, style = {} }) {
 }
 
 function AnimNum({ value, suffix = "" }) {
-  const [d, setD] = useState(0);
-  const [ref, vis] = useInView(0.3);
-  useEffect(() => {
-    if (!vis) return;
-    const n = parseInt(value.toString().replace(/\D/g, ""));
-    if (isNaN(n)) { setD(value); return; }
-    let s = 0; const step = Math.max(1, Math.floor(n / 80));
-    const t = setInterval(() => { s += step; if (s >= n) { setD(n); clearInterval(t); } else setD(s); }, 16);
-    return () => clearInterval(t);
-  }, [vis, value]);
-  return <span ref={ref}>{typeof d === "number" ? d.toLocaleString() : d}{suffix}</span>;
+  const n = parseInt(value.toString().replace(/\D/g, ""));
+  return <span>{isNaN(n) ? value : n.toLocaleString()}{suffix}</span>;
 }
 
 function Card({ children, style: s = {} }) {
@@ -893,7 +884,7 @@ export default function AILTSite() {
           <div style={{ position: "absolute", top: "-20%", right: "-10%", width: 600, height: 600, background: `radial-gradient(circle,${G}08 0%,transparent 70%)`, pointerEvents: "none" }} />
           <div style={{ textAlign: "center", maxWidth: 800, position: "relative", zIndex: 1 }}>
             <FI><div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, color: G, textTransform: "uppercase", marginBottom: 16 }}>Adaptive Inclusive Leadership Theory</div></FI>
-            <FI delay={0.15}><h1 className="ailt-hero-title" style={{ fontSize: 48, fontWeight: 300, color: L, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1.15, marginBottom: 20 }}>Leadership for the<br /><span style={{ fontWeight: 700, fontStyle: "italic" }}>Age of AI</span></h1></FI>
+            <FI delay={0.15}><h1 className="ailt-hero-title" style={{ fontSize: 48, fontWeight: 300, color: L, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1.15, marginBottom: 20 }}>Leadership for the<br /><span style={{ fontWeight: 700, fontStyle: "italic" }}>Age of Artificial Intelligence</span></h1></FI>
             <FI delay={0.3}><p style={{ fontSize: 17, color: T, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 32px" }}>For executives, people leaders, and AI governance teams whose decisions now pass through algorithms. A theory, a book, six free tools, and a 12-week course that works from the book, page by page.</p></FI>
             <FI delay={0.45}><div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
               <button onClick={() => setPage("assessment")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Take the free assessment</button>
@@ -958,10 +949,10 @@ export default function AILTSite() {
 
         <section id="book" style={{ padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTitle tag="The Book" title="Leadership for the Age of AI" sub="73,000 words of theory, evidence, case studies, and practical application." />
-            <div className="g2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
+            <SectionTitle tag="The Book" title="Leadership for the Age of Artificial Intelligence" sub="73,000 words of theory, evidence, case studies, and practical application." />
+            <div className="g2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "start" }}>
               <FI><div style={{ background: `linear-gradient(135deg,${D2},${D3})`, border: `1px solid ${G}20`, borderRadius: 16, padding: 40, textAlign: "center" }}>
-                <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ display: "block", maxWidth: 320, margin: "0 auto 24px" }}>
+                <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ display: "block", maxWidth: 280, margin: "0 auto 24px" }}>
                   <img src="/book-cover.jpg" alt="Book cover: Leadership for the Age of Artificial Intelligence by Matthew Culwell" style={{ display: "block", width: "100%", height: "auto", borderRadius: 12, border: `1px solid ${G}30`, boxShadow: "0 24px 80px rgba(0,0,0,0.6)" }} />
                 </a>
                 <div style={{ fontSize: 22, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif", marginBottom: 4 }}>Adaptive Inclusive<br />Leadership Theory</div>
