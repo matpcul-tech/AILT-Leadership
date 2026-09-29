@@ -1043,10 +1043,15 @@ export default function AILTSite() {
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <SectionTitle tag="About" title="Matthew Culwell" />
             <FI><Card style={{ padding: 32 }}>
+              <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 28, alignItems: "start" }}>
+              <img src="/matthew-culwell.jpg" alt="Matthew Culwell" style={{ width: "100%", height: "auto", borderRadius: 14, border: `1px solid ${G}30`, boxShadow: "0 16px 48px rgba(0,0,0,0.5)" }} />
+              <div>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory. His doctoral research at Liberty University focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities, a gap that becomes critical when algorithms make decisions once exclusively human.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in a meta-analysis of 105 samples (N = 39,948) and in evidence from over 100,000 participants across the studies cited.</p>
               <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 18, color: G, fontWeight: 700, fontSize: 13, textDecoration: "none", border: `1px solid ${G}40`, padding: "8px 14px", borderRadius: 8 }}>Matthew Culwell on LinkedIn</a>
+              </div>
+              </div>
             </Card></FI>
           </div>
         </section>
@@ -1119,6 +1124,8 @@ export default function AILTSite() {
           .ailt-nav-links.open button, .ailt-nav-links.open a { text-align: left; padding: 12px 8px !important; font-size: 15px !important; margin: 0 !important; }
           .ailt-page section, .ailt-page footer { padding-left: 20px !important; padding-right: 20px !important; }
           .g2, .g3, .g4 { grid-template-columns: 1fr !important; }
+          .about-grid { grid-template-columns: 1fr !important; }
+          .about-grid img { max-width: 220px; }
           .ailt-hero-title { font-size: 36px !important; }
           .ailt-footer > div { flex-direction: column !important; gap: 10px; text-align: center; }
         }
