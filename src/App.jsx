@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { advise, designMeeting, scanReport, coachOpen, coachReply, gapReport, readProfile } from "./engine.js";
 import { Program } from "./program.jsx";
+import { MODULES } from "./curriculum.js";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
 
@@ -89,6 +90,9 @@ const ASSESS_ITEMS = {
     "I adjust stakeholder involvement as conditions change.",
     "I anticipate how technology changes affect different groups differently.",
     "I create structures enabling all levels to contribute distinct perspectives.",
+    "I change course when the people closest to the work show me the plan is not holding.",
+    "I check who was absent from the room before I treat a decision as settled.",
+    "I build in time for people to learn what a new system demands of them, not only to use it.",
   ]},
   ps: { title: "Participatory Sensemaking (PS)", color: "#0d9488", items: [
     "In ambiguous situations, I facilitate collective discussion.",
@@ -101,6 +105,9 @@ const ASSESS_ITEMS = {
     "When new info contradicts plans, I facilitate open discussion.",
     "I include underrepresented groups in workforce impact discussions.",
     "I model intellectual humility by acknowledging what I do not know.",
+    "I ask what an algorithm was trained on before I ask what it recommends.",
+    "I keep more than one reading of a situation open until the evidence settles it.",
+    "I make sure the people who will live with a decision help interpret the data behind it.",
   ]},
   ecf: { title: "Equity-Centered Flexibility (ECF)", color: "#dc2626", items: [
     "I assess how changes affect different groups differently.",
@@ -113,6 +120,9 @@ const ASSESS_ITEMS = {
     "During restructuring, I consider which roles are cut and who holds them.",
     "I hold myself accountable for ensuring changes advance equity.",
     "My equity approach evolves with conditions.",
+    "I can name who carries the cost of a change I am leading, not only who benefits.",
+    "I slow a rollout when its effects on one group are not yet understood.",
+    "I look at outcomes by group after a change, not only at the average.",
   ]},
   psy: { title: "Psychological Safety", color: "#7c3aed", items: [
     "People feel safe taking interpersonal risks on my team.",
@@ -125,6 +135,9 @@ const ASSESS_ITEMS = {
     "I protect people who voice unpopular concerns.",
     "Disagreement is treated as contribution, not threat.",
     "I have explicitly discussed psychological safety with my team.",
+    "People tell me about problems before they become failures.",
+    "Someone junior can overrule an algorithm on my team and explain why without penalty.",
+    "I thank people for bad news in front of others.",
   ]},
 };
 
@@ -182,7 +195,7 @@ const MEETING_TYPES = [
 
 const TOOLS = [
   { id: "advisor", icon: "🎯", title: "Leadership Advisor", desc: "Describe a situation. The reading comes from the book’s cases and the three capacities, not from a model.", tag: "From the book" },
-  { id: "assessment", icon: "📊", title: "Self-Assessment", desc: "40 items across IAC, PS, ECF, and Psychological Safety. Scored on this device.", tag: "On this device" },
+  { id: "assessment", icon: "📊", title: "Self-Assessment", desc: "52 items across IAC, PS, ECF, and Psychological Safety. Scored on this device.", tag: "On this device" },
   { id: "meeting", icon: "📋", title: "Meeting Architect", desc: "A timed agenda with a safety opener, two readings, an equity check, and a stop-rule.", tag: "From the book" },
   { id: "scanner", icon: "🔍", title: "AI Readiness Scanner", desc: "Fifteen questions. Gaps are scored from what you write, then turned into a ninety-day list.", tag: "On this device" },
   { id: "coach", icon: "💬", title: "Leadership Coach", desc: "Five modes of questions drawn from the book. It remembers the thread of this session only.", tag: "From the book" },
@@ -266,7 +279,7 @@ function AssessmentTool({ onBack }) {
   };
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <ToolHeader title="AILT Self-Assessment" subtitle="40 items across four dimensions" onBack={onBack} />
+      <ToolHeader title="AILT Self-Assessment" subtitle="52 items across four dimensions" onBack={onBack} />
       <div style={{ padding: "12px 24px", borderBottom: `1px solid ${D3}`, display: "flex", gap: 8, justifyContent: "center", flexShrink: 0 }}>
         {["take","results"].map(v => (
           <button key={v} onClick={() => setView(v)} style={{ background: view === v ? G : D2, color: view === v ? D : T, border: `1px solid ${view === v ? G : G+"20"}`, padding: "8px 24px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
@@ -757,8 +770,62 @@ function FeedbackTool({ onBack }) {
   );
 }
 
+const TOOL_IDS = ["advisor", "assessment", "meeting", "scanner", "coach", "360"];
+const LESSON_IDS = MODULES.flatMap(m => m.lessons.map(l => l.id));
+
+function readRoute() {
+  const h = window.location.hash.replace(/^#\/?/, "");
+  if (!h) return { page: "home", lesson: null };
+  const [a, b] = h.split("/");
+  if (a === "course") return { page: "program", lesson: LESSON_IDS.includes(b) ? b : null };
+  if (a === "tools" && TOOL_IDS.includes(b)) return { page: b, lesson: null };
+  if (a === "privacy") return { page: "privacy", lesson: null };
+  return { page: "home", lesson: null };
+}
+
+function toHash(page, lesson) {
+  if (page === "home") return "";
+  if (page === "program") return lesson ? `#/course/${lesson}` : "#/course";
+  if (page === "privacy") return "#/privacy";
+  return `#/tools/${page}`;
+}
+
+function PrivacyPage({ onBack }) {
+  const P = ({ children }) => <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>{children}</p>;
+  const H = ({ children }) => <h3 style={{ fontSize: 18, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif", margin: "24px 0 8px" }}>{children}</h3>;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      <ToolHeader title="Privacy notice" subtitle="What this site keeps, and where" onBack={onBack} />
+      <div style={{ flex: 1, overflow: "auto", padding: 24 }}>
+        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+          <P>This site is run by Matthew Culwell. It has no accounts, no tracking pixels, and no advertising. This notice covers the two places where your information can go.</P>
+          <H>The contact form</H>
+          <P>When you send a message, your name, email address, and message are delivered to Matthew through Formspree, a form-handling service. They are used only to reply to you. They are not sold, shared for marketing, or added to a mailing list. Formspree keeps its own copy under its terms, and you can ask for your message to be deleted by writing through the same form.</P>
+          <H>The tools and the course</H>
+          <P>The six tools and the 12-week course run entirely in your browser. Assessment scores, scanner answers, 360 ratings, coaching threads, and your course journal are stored in this browser's local storage on this device. Nothing you type into them is sent to this site or to any server. Clearing your browser data removes them, which is why the course lets you download your journal at any time.</P>
+          <H>Third parties</H>
+          <P>The site loads fonts from Google Fonts and is hosted on Vercel, both of which receive the ordinary technical information a browser sends when it requests a page, such as your IP address. The book link goes to Amazon, which has its own privacy policy.</P>
+          <H>Questions</H>
+          <P>Use the contact form. This notice was last updated in September 2026.</P>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AILTSite() {
-  const [page, setPage] = useState("home");
+  const [route, setRoute] = useState(readRoute);
+  const page = route.page;
+  useEffect(() => {
+    const h = () => setRoute(readRoute());
+    window.addEventListener("hashchange", h);
+    return () => window.removeEventListener("hashchange", h);
+  }, []);
+  const setPage = (p, lesson) => {
+    const next = toHash(p, lesson);
+    if (window.location.hash === next || (!next && !window.location.hash)) { setRoute(readRoute()); return; }
+    window.location.hash = next;
+  };
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [contact, setContact] = useState({ name: "", email: "", msg: "" });
@@ -789,7 +856,7 @@ export default function AILTSite() {
   }, []);
   useEffect(() => { if (mainRef.current) mainRef.current.scrollTop = 0; }, [page]);
   const go = (id) => { if (page==="home") document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); };
-  const back = useCallback(() => setPage("home"), []);
+  const back = useCallback(() => { window.location.hash = ""; }, []);
   const W = (child) => <div style={{ height: "100vh", background: D, color: L, fontFamily: "'Outfit',sans-serif", display: "flex", flexDirection: "column" }}>{child}</div>;
 
   if (page==="advisor")    return W(<AdvisorTool onBack={back} />);
@@ -798,11 +865,12 @@ export default function AILTSite() {
   if (page==="scanner")    return W(<ScannerTool onBack={back} />);
   if (page==="coach")      return W(<CoachTool onBack={back} />);
   if (page==="360")        return W(<FeedbackTool onBack={back} />);
-  if (page==="program")    return <Program onBack={back} />;
+  if (page==="program")    return <Program onBack={back} initial={route.lesson} onLesson={id => window.history.replaceState(null, "", toHash("program", id))} />;
+  if (page==="privacy")    return W(<PrivacyPage onBack={back} />);
 
   return (
     <div className="ailt-page" style={{ height: "100vh", overflow: "hidden", background: D, color: L, fontFamily: "'Outfit',sans-serif" }}>
-      <nav className="ailt-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled?D+"ee":"transparent", backdropFilter: scrolled?"blur(20px)":"none", borderBottom: scrolled?`1px solid ${G}15`:"none", transition: "all 0.4s", padding: "0 40px" }}>
+      <nav className={"ailt-nav" + (menu ? " menu-open" : "")} style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: (scrolled||menu)?D+"ee":"transparent", backdropFilter: (scrolled||menu)?"blur(20px)":"none", borderBottom: scrolled?`1px solid ${G}15`:"none", transition: "all 0.4s", padding: "0 40px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setMenu(false); setPage("home"); if(mainRef.current) mainRef.current.scrollTop=0; }}>
             <div style={{ width: 32, height: 32, borderRadius: 8, background: `linear-gradient(135deg,${G},#8b6914)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 800, color: D }}>A</div>
@@ -813,7 +881,7 @@ export default function AILTSite() {
             {["theory","evidence","book","tools","course","about","contact"].map(n => (
               <button key={n} onClick={() => { setMenu(false); go(n); }} style={{ background: "none", border: "none", color: T, fontSize: 12, fontWeight: 600, padding: "8px 10px", cursor: "pointer", textTransform: "capitalize" }}>{n}</button>
             ))}
-            <button onClick={() => { setMenu(false); setPage("program"); }} style={{ background:`linear-gradient(135deg,${G},#a88a28)`, color: D, padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer", marginLeft: 4 }}>Program</button>
+            <button onClick={() => { setMenu(false); setPage("program"); }} style={{ background:`linear-gradient(135deg,${G},#a88a28)`, color: D, padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 700, border: "none", cursor: "pointer", marginLeft: 4 }}>Open the course</button>
             <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>Buy Book</a>
           </div>
         </div>
@@ -825,17 +893,17 @@ export default function AILTSite() {
           <div style={{ textAlign: "center", maxWidth: 800, position: "relative", zIndex: 1 }}>
             <FI><div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 4, color: G, textTransform: "uppercase", marginBottom: 16 }}>Adaptive Inclusive Leadership Theory</div></FI>
             <FI delay={0.15}><h1 className="ailt-hero-title" style={{ fontSize: 48, fontWeight: 300, color: L, fontFamily: "'Cormorant Garamond',serif", lineHeight: 1.15, marginBottom: 20 }}>Leadership for the<br /><span style={{ fontWeight: 700, fontStyle: "italic" }}>Age of AI</span></h1></FI>
-            <FI delay={0.3}><p style={{ fontSize: 17, color: T, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 32px" }}>When algorithms make decisions that were once exclusively human, organizations need a framework that governs transformation equitably.</p></FI>
+            <FI delay={0.3}><p style={{ fontSize: 17, color: T, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 32px" }}>For executives, people leaders, and AI governance teams whose decisions now pass through algorithms. A theory, a book, six free tools, and a 12-week course that works from the book, page by page.</p></FI>
             <FI delay={0.45}><div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <button onClick={() => setPage("program")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Begin the course</button>
-              <button onClick={() => go("theory")} style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Learn the Theory</button>
+              <button onClick={() => setPage("assessment")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Take the free assessment</button>
+              <a href="https://a.co/d/056JGgCx" target="_blank" rel="noopener noreferrer" style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Buy the book</a>
             </div></FI>
           </div>
         </section>
 
         <section style={{ background: D2, borderTop: `1px solid ${G}10`, borderBottom: `1px solid ${G}10`, padding: "36px 40px" }}>
           <div className="g4" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, textAlign: "center" }}>
-            {[{n:"39948",s:"+",l:"Participants in evidence base"},{n:"105",s:"",l:"Independent samples"},{n:"5",s:"",l:"Testable propositions"},{n:"541",s:"",l:"Verified references"}].map((s,i)=>(
+            {[{n:"39948",s:"",l:"Participants in the core meta-analysis"},{n:"105",s:"",l:"Independent samples"},{n:"5",s:"",l:"Testable propositions"},{n:"541",s:"",l:"Verified references"}].map((s,i)=>(
               <FI key={i} delay={i*0.1}>
                 <div style={{ fontSize: 28, fontWeight: 700, color: G, fontFamily: "'Cormorant Garamond',serif" }}><AnimNum value={s.n} suffix={s.s} /></div>
                 <div style={{ fontSize: 11, color: T, marginTop: 4 }}>{s.l}</div>
@@ -851,7 +919,7 @@ export default function AILTSite() {
               {tag:"Construct 1",t:"Inclusive Adaptive Capacity",a:"IAC",c:"#2563eb",lv:"Organizational",d:"Responding to complex challenges by integrating diverse perspectives. In the AI age: ensuring diverse stakeholders govern AI systems."},
               {tag:"Construct 2",t:"Participatory Sensemaking",a:"PS",c:"#0d9488",lv:"Team",d:"Collective interpretation of ambiguity. When AI produces opaque recommendations, diverse teams must interpret outputs together."},
               {tag:"Construct 3",t:"Equity-Centered Flexibility",a:"ECF",c:"#dc2626",lv:"Cross-Level",d:"Adapting structures during change while advancing equity. Monitoring AI differential impacts and ensuring equitable access."},
-              {tag:"Mediator",t:"Psychological Safety",a:"PS*",c:"#7c3aed",lv:"Foundation",d:"Shared belief the team is safe for risk-taking. Enables diverse voices and is reinforced when inclusive processes succeed."},
+              {tag:"Mediator",t:"Psychological Safety",a:"PSY",c:"#7c3aed",lv:"Foundation",d:"Shared belief the team is safe for risk-taking. Enables diverse voices and is reinforced when inclusive processes succeed."},
             ].map((c,i)=>(
               <FI key={i} delay={i*0.1}><Card>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
@@ -917,7 +985,7 @@ export default function AILTSite() {
                 <div style={{ fontSize: 13, color: G, fontStyle: "italic" }}>by Matthew Culwell</div>
               </div></FI>
               <FI delay={0.15}><div>
-                {["15 chapters with story-driven openings","Evidence from 100,000+ participants","10 For Your Organization application sections","AI governance cases: Amazon, iTutorGroup, Workday","52-item assessment + 541 verified references"].map((x,i)=>(
+                {["15 chapters with story-driven openings","Evidence from over 100,000 participants across the studies cited","10 For Your Organization application sections","AI governance cases: Amazon, iTutorGroup, Workday","52-item assessment + 541 verified references"].map((x,i)=>(
                   <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
                     <span style={{ color: G, marginTop: 2 }}>→</span>
                     <span style={{ fontSize: 14, color: T, lineHeight: 1.6 }}>{x}</span>
@@ -958,18 +1026,11 @@ export default function AILTSite() {
 
         <section id="course" style={{ padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTitle tag="12-Week Program" title="Read the Book. Write from It." sub="Twelve weeks through Adaptive Inclusive Leadership Theory. Each week uses the chapter titles from the book. A week counts only when the journal cites the page and uses the passage." />
+            <SectionTitle tag="12-Week Course" title="Read the Book. Write from It." sub="Twelve weeks through Adaptive Inclusive Leadership Theory. Each week uses the chapter titles from the book. A week counts only when the journal cites the page and uses the passage." />
             <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
-              {[
-                {n:1,t:"Foundations of AILT",w:"1-2",d:"The case for integrating adaptability and inclusivity. Psychological safety as the foundation."},
-                {n:2,t:"Inclusive Adaptive Capacity",w:"3-4",d:"Technical vs adaptive challenges. Building cognitive flexibility and diverse integration."},
-                {n:3,t:"Participatory Sensemaking",w:"5-6",d:"Collective interpretation of ambiguity. Sensemaking in AI-augmented decision environments."},
-                {n:4,t:"Equity-Centered Flexibility",w:"7-8",d:"Equity during organizational change. AI governance and the equity imperative."},
-                {n:5,t:"AILT and AI Governance",w:"9-10",d:"Leading AI transformation with AILT. Sustaining inclusive governance in changing landscapes."},
-                {n:6,t:"Capstone",w:"11-12",d:"Integration, 360 assessment, peer feedback, and personal AILT leadership development plan."},
-              ].map((m,i)=>(
+              {MODULES.map(m => ({ n: m.id, t: m.title, w: m.weeks.replace("\u2013", "-"), d: m.summary, first: m.lessons[0].id })).map((m,i)=>(
                 <FI key={i} delay={i*0.08}>
-                  <button onClick={() => setPage("program")} style={{ background: "transparent", border: "none", padding: 0, width: "100%", textAlign: "left", color: "inherit", cursor: "pointer" }}>
+                  <button onClick={() => setPage("program", m.first)} style={{ background: "transparent", border: "none", padding: 0, width: "100%", textAlign: "left", color: "inherit", cursor: "pointer" }}>
                     <Card style={{ height: "100%", position: "relative", overflow: "hidden" }}>
                       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${G},#a88a28)` }} />
                       <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: G, textTransform: "uppercase", marginBottom: 4 }}>Module {m.n}</div>
@@ -983,7 +1044,7 @@ export default function AILTSite() {
               ))}
             </div>
             <FI delay={0.5}><div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 40 }}>
-              <button onClick={() => setPage("program")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Start the 12-week program</button>
+              <button onClick={() => setPage("program")} style={{ background: `linear-gradient(135deg,${G},#a88a28)`, color: D, border: "none", padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Start the 12-week course</button>
               <button onClick={() => go("contact")} style={{ background: "transparent", color: G, border: `1px solid ${G}40`, padding: "14px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Inquire About Enrollment</button>
             </div></FI>
           </div>
@@ -1010,7 +1071,7 @@ export default function AILTSite() {
             <FI><Card style={{ padding: 32 }}>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory and a doctoral researcher focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities, a gap that becomes critical when algorithms make decisions once exclusively human.</p>
-              <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in evidence from over 100,000 participants.</p>
+              <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in a meta-analysis of 105 samples (N = 39,948) and in evidence from over 100,000 participants across the studies cited.</p>
             </Card></FI>
           </div>
         </section>
@@ -1036,6 +1097,7 @@ export default function AILTSite() {
                     style={{ background: contact.name&&contact.email&&contact.msg&&!contactLoading?`linear-gradient(135deg,${G},#a88a28)`:D3, color: contact.name&&contact.email&&contact.msg&&!contactLoading?D:T, border: "none", padding: "14px 28px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: contact.name&&contact.email&&contact.msg&&!contactLoading?"pointer":"not-allowed", alignSelf: "flex-start" }}>
                     {contactLoading ? "Sending..." : "Send Message"}
                   </button>
+                  <div style={{ fontSize: 11, color: T, lineHeight: 1.6 }}>Your name, email, and message go to Matthew through Formspree and are used only to reply to you. <button onClick={() => setPage("privacy")} style={{ background: "none", border: "none", color: G, fontSize: 11, cursor: "pointer", padding: 0, textDecoration: "underline" }}>Privacy notice</button></div>
                 </div>
               )}
             </Card></FI>
@@ -1048,7 +1110,10 @@ export default function AILTSite() {
               <div style={{ width: 28, height: 28, borderRadius: 7, background: `linear-gradient(135deg,${G},#8b6914)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, color: D }}>A</div>
               <span style={{ fontSize: 12, color: T }}>Adaptive Inclusive Leadership Theory</span>
             </div>
-            <div style={{ fontSize: 11, color: "#3a4252" }}>2026 Matthew Culwell. All rights reserved.</div>
+            <div style={{ fontSize: 11, color: "#3a4252", display: "flex", gap: 14, alignItems: "center" }}>
+              <span>© 2026 Matthew Culwell. All rights reserved.</span>
+              <button onClick={() => setPage("privacy")} style={{ background: "none", border: "none", color: T, fontSize: 11, cursor: "pointer", padding: 0 }}>Privacy</button>
+            </div>
           </div>
         </footer>
       </main>
@@ -1063,6 +1128,7 @@ export default function AILTSite() {
         @media (max-width: 860px) {
           .ailt-burger { display: inline-flex !important; align-items: center; }
           .ailt-nav { padding: 0 16px !important; }
+          .ailt-nav.menu-open { background: #07090d !important; }
           .ailt-nav-links { display: none !important; }
           .ailt-nav-links.open {
             display: flex !important;
@@ -1070,7 +1136,7 @@ export default function AILTSite() {
             align-items: stretch !important;
             position: absolute;
             top: 64px; left: 0; right: 0;
-            background: #07090df2;
+            background: #07090d;
             padding: 8px 16px 16px;
             border-bottom: 1px solid #c8a43433;
           }

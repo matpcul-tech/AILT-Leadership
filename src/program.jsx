@@ -13,10 +13,11 @@ function load() {
   } catch { return empty(); }
 }
 
-export function Program({ onBack }) {
+export function Program({ onBack, initial, onLesson }) {
   const [store, setStore] = useState(load);
-  const [modId, setModId] = useState(MODULES[0].id);
-  const [lesId, setLesId] = useState(MODULES[0].lessons[0].id);
+  const start = MODULES.find(m => m.lessons.some(l => l.id === initial)) || MODULES[0];
+  const [modId, setModId] = useState(start.id);
+  const [lesId, setLesId] = useState(initial && start.lessons.some(l => l.id === initial) ? initial : start.lessons[0].id);
   const [pick, setPick] = useState(null);
   const [note, setNote] = useState("");
   const [chapter, setChapter] = useState("");
@@ -40,7 +41,7 @@ export function Program({ onBack }) {
     setMsg("");
   }, [les.id]);
 
-  const open = (m, l) => { setModId(m); setLesId(l); };
+  const open = (m, l) => { setModId(m); setLesId(l); if (onLesson) onLesson(l); };
 
   const save = () => {
     const text = note.trim();
@@ -100,7 +101,7 @@ export function Program({ onBack }) {
       <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "14px 20px", borderBottom: `1px solid ${D3}`, flexShrink: 0 }}>
         <button onClick={onBack} style={btnGhost}>← Site</button>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 11, letterSpacing: 2, color: G, fontWeight: 700 }}>12-WEEK PROGRAM</div>
+          <div style={{ fontSize: 11, letterSpacing: 2, color: G, fontWeight: 700 }}>12-WEEK COURSE</div>
           <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 22 }}>AILT Leadership Course</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
