@@ -12,7 +12,7 @@ export const MODULES = [
         "minutes": 70,
         "title": "When the Algorithm Decides",
         "aim": "See why the book says adaptability and inclusivity fail when they are treated as separate skills.",
-        "reading": "Read the Preface and Chapter 1, “When the Algorithm Decides,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 1. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read the Preface and Chapter 1, “When the Algorithm Decides,” in Leadership for the Age of AI. It begins on page 1. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "Do not let the opening company become the subject. Mark the sentence that says the story is not about that company.",
           "Mark where the three capabilities are named, and the line about what holds them together. Then mark the prediction that says which failure is worse. The names belong in your journal, from the page."
@@ -39,7 +39,7 @@ export const MODULES = [
         "minutes": 60,
         "title": "The Adaptive Organization",
         "aim": "Use Chapter 2’s account of adaptive capacity, not a slogan about being agile.",
-        "reading": "Read Chapter 2, “The Adaptive Organization,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 21. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 2, “The Adaptive Organization,” in Leadership for the Age of AI. It begins on page 21. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening is a date, not a definition. Mark what the organizations that coped were able to tell, and what the others could not.",
           "Mark the distinction between a problem the existing expertise can already solve and a challenge that requires people to learn. Note which one a technology rollout is sold as, and which one it is lived as."
@@ -75,7 +75,7 @@ export const MODULES = [
         "minutes": 60,
         "title": "Inclusion When the Algorithm Is Watching",
         "aim": "See how Chapter 3 separates a diversity statement from a system that was never examined by the people it sorts.",
-        "reading": "Read Chapter 3, “Inclusion When the Algorithm Is Watching,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 43. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 3, “Inclusion When the Algorithm Is Watching,” in Leadership for the Age of AI. It begins on page 43. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening is a case in which software sorted people before a human saw them. Mark the sentence that says intent was not required.",
           "Mark the difference the chapter draws between a written policy and an evaluation that includes the people the system can harm."
@@ -103,7 +103,7 @@ export const MODULES = [
         "minutes": 60,
         "title": "When the Data Has an Opinion",
         "aim": "Use Chapter 4’s opening scene. Say what the room did with the score.",
-        "reading": "Read Chapter 4, “Making Decisions When the Data Has an Opinion,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 65. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 4, “Making Decisions When the Data Has an Opinion,” in Leadership for the Age of AI. It begins on page 65. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening is a room with a short clock and a ranked list. Mark who the rank buries. Do not copy the book’s description onto this screen.",
           "Mark the move the book wants instead of treating a challenge to the score as a challenge to mathematics."
@@ -139,7 +139,7 @@ export const MODULES = [
         "minutes": 60,
         "title": "Humans and Machines Share the Work",
         "aim": "Use Chapter 5’s opening. Name the two failures and what the third path requires.",
-        "reading": "Read Chapter 5, “Communication When Humans and Machines Share the Work,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 87. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 5, “Communication When Humans and Machines Share the Work,” in Leadership for the Age of AI. It begins on page 87. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The opening puts a person between a model and what they can see. Mark the two failures the chapter names. Do not write them here.",
           "Mark what has to be true before someone can say the model and the room disagree."
@@ -166,7 +166,7 @@ export const MODULES = [
         "minutes": 150,
         "title": "Five Cases",
         "aim": "Read the cases as tests of the theory, not as success stories.",
-        "reading": "Read Chapter 6, “Case Studies of Adaptive Inclusive Leadership,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, including Synergistic Solutions, Global Dynamics, InnovateTech, GreenTech Solutions, and Community Connect. It begins on page 109. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 6, “Case Studies of Adaptive Inclusive Leadership,” in Leadership for the Age of AI, including Synergistic Solutions, Global Dynamics, InnovateTech, GreenTech Solutions, and Community Connect. It begins on page 109. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "Read the paragraph that says why these five organizations were chosen before you read the stories. The sectors are the point. The screen will not list them.",
           "Do not stop at the stories. Mark the patterns the chapter names after the last case. The journal has to use one of those patterns from the page."
@@ -202,7 +202,7 @@ export const MODULES = [
         "minutes": 70,
         "title": "Practical Tools",
         "aim": "Use Chapter 7 on yourself. The tool is not the point. The gap is.",
-        "reading": "Read Chapter 7, “Practical Tools and Techniques,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence, and begin Appendix A, the AILT assessment, which starts on page 325. Chapter 7 begins on page 133. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 7, “Practical Tools and Techniques,” in Leadership for the Age of AI, and begin Appendix A, the AILT assessment, which starts on page 325. Chapter 7 begins on page 133. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "The chapter refuses a passive reading. Mark the questions it asks you to answer about your own practice, including the ones about a system. Do not answer them from memory of this screen.",
           "Appendix A is the longer instrument. Use it as a diagnosis. Mark the items you wanted to skip."
@@ -265,7 +265,7 @@ export const MODULES = [
         "minutes": 70,
         "title": "Discussion and Synthesis",
         "aim": "Leave Chapter 10 able to say both the pattern and the limit.",
-        "reading": "Read Chapter 10, “Systematic Evidence Review: Discussion and Synthesis,” in Adaptive Inclusive Leadership Theory: Leadership for the Age of Artificial Intelligence. It begins on page 199. This is the chapter the preface points to for the research agenda. Copy the chapter title as printed. Do not write the journal from this screen.",
+        "reading": "Read Chapter 10, “Systematic Evidence Review: Discussion and Synthesis,” in Leadership for the Age of AI. It begins on page 199. This is the chapter the preface points to for the research agenda. Copy the chapter title as printed. Do not write the journal from this screen.",
         "teach": [
           "Mark the sentence about what the studies converge on, and the sentence about the limit. Read the limit at least as carefully as the claim.",
           "Write down what the chapter says still has to be measured, and what a leader is still responsible for before that measurement exists."

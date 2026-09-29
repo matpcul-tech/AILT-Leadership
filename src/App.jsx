@@ -865,7 +865,7 @@ export default function AILTSite() {
   if (page==="scanner")    return W(<ScannerTool onBack={back} />);
   if (page==="coach")      return W(<CoachTool onBack={back} />);
   if (page==="360")        return W(<FeedbackTool onBack={back} />);
-  if (page==="program")    return <Program onBack={back} initial={route.lesson} onLesson={id => window.history.replaceState(null, "", toHash("program", id))} />;
+  if (page==="program")    return <Program onBack={back} initial={route.lesson} onLesson={id => { if (window.location.hash !== toHash("program", id)) window.history.pushState(null, "", toHash("program", id)); }} />;
   if (page==="privacy")    return W(<PrivacyPage onBack={back} />);
 
   return (
@@ -1002,7 +1002,7 @@ export default function AILTSite() {
 
         <section id="tools" style={{ background: D2, padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTitle tag="Adaptive AI Suite" title="Leadership Tools Powered by AILT" sub="Six tools designed for leaders, consultants, and organizations navigating AI-driven transformation." />
+            <SectionTitle tag="Six Free Tools" title="Tools Built from the Book" sub="Six tools designed for leaders, consultants, and organizations navigating AI-driven transformation." />
             <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {TOOLS.map((t,i)=>(
                 <FI key={i} delay={i*0.08}>
