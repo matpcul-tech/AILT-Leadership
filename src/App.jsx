@@ -4,6 +4,7 @@ import { Program } from "./program.jsx";
 import { MODULES } from "./curriculum.js";
 
 const G = "#c8a434", D = "#07090d", D2 = "#0c1018", D3 = "#151b26", T = "#9ca3b4", L = "#e4ddd0";
+const LINKEDIN = "https://www.linkedin.com/in/matthew-culwell-784240282";
 
 function useInView(th = 0.15) {
   const ref = useRef(null);
@@ -978,7 +979,7 @@ export default function AILTSite() {
                   <div style={{ width:40, height:1, background:"#c8a434", margin:"16px auto" }} />
                   <div style={{ fontSize:11, letterSpacing:3, color:"#c8a43490", textTransform:"uppercase", marginBottom:20 }}>Governance · Equity · Adaptation</div>
                   <div style={{ fontSize:13, fontWeight:600, color:"#c8a434", letterSpacing:2, textTransform:"uppercase" }}>Matthew Culwell</div>
-                  <div style={{ fontSize:11, color:"#9ca3b4", marginTop:4 }}>Doctoral Researcher · Sovereign Shield Technologies</div>
+                  <div style={{ fontSize:11, color:"#9ca3b4", marginTop:4 }}>Doctoral research, Liberty University · Sovereign Shield Technologies</div>
                   <div style={{ position:"absolute", bottom:0, left:0, right:0, height:3, background:"linear-gradient(90deg,#c8a434,#8b6914)" }} />
                 </div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: L, fontFamily: "'Cormorant Garamond',serif", marginBottom: 4 }}>Adaptive Inclusive<br />Leadership Theory</div>
@@ -1069,9 +1070,10 @@ export default function AILTSite() {
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <SectionTitle tag="About" title="Matthew Culwell" />
             <FI><Card style={{ padding: 32 }}>
-              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory and a doctoral researcher focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
+              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory. His doctoral research at Liberty University focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities, a gap that becomes critical when algorithms make decisions once exclusively human.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in a meta-analysis of 105 samples (N = 39,948) and in evidence from over 100,000 participants across the studies cited.</p>
+              <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 18, color: G, fontWeight: 700, fontSize: 13, textDecoration: "none", border: `1px solid ${G}40`, padding: "8px 14px", borderRadius: 8 }}>Matthew Culwell on LinkedIn</a>
             </Card></FI>
           </div>
         </section>
@@ -1112,6 +1114,7 @@ export default function AILTSite() {
             </div>
             <div style={{ fontSize: 11, color: "#3a4252", display: "flex", gap: 14, alignItems: "center" }}>
               <span>© 2026 Matthew Culwell. All rights reserved.</span>
+              <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ color: T, fontSize: 11, textDecoration: "none" }}>LinkedIn</a>
               <button onClick={() => setPage("privacy")} style={{ background: "none", border: "none", color: T, fontSize: 11, cursor: "pointer", padding: 0 }}>Privacy</button>
             </div>
           </div>
