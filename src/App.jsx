@@ -895,7 +895,7 @@ export default function AILTSite() {
 
         <section style={{ background: D2, borderTop: `1px solid ${G}10`, borderBottom: `1px solid ${G}10`, padding: "36px 40px" }}>
           <div className="g4" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, textAlign: "center" }}>
-            {[{n:"39948",s:"",l:"Participants in the core meta-analysis"},{n:"105",s:"",l:"Independent samples"},{n:"5",s:"",l:"Testable propositions"},{n:"541",s:"",l:"Verified references"}].map((s,i)=>(
+            {[{n:"39948",s:"",l:"Participants in the meta-analysis AILT builds on"},{n:"105",s:"",l:"Independent samples"},{n:"5",s:"",l:"Testable propositions"},{n:"541",s:"",l:"Verified references"}].map((s,i)=>(
               <FI key={i} delay={i*0.1}>
                 <div style={{ fontSize: 28, fontWeight: 700, color: G, fontFamily: "'Cormorant Garamond',serif" }}><AnimNum value={s.n} suffix={s.s} /></div>
                 <div style={{ fontSize: 11, color: T, marginTop: 4 }}>{s.l}</div>
@@ -927,14 +927,14 @@ export default function AILTSite() {
 
         <section id="evidence" style={{ background: D2, padding: "100px 40px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTitle tag="The Evidence" title="Built on Real Research" sub="Every claim grounded in verified meta-analyses and published research." />
+            <SectionTitle tag="The Evidence" title="Built on Real Research" sub="Grounded in published meta-analyses and peer-reviewed research by other scholars." />
             <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {[
                 {c:"Li, Ling, & Zhu (2025)",s:"Asia Pacific J. of Management",st:"105 samples, N=39,948",f:"Inclusive leadership predicts performance, innovation, creativity, voice."},
                 {c:"Frazier et al. (2017)",s:"Personnel Psychology",st:"136 samples, N>22,000",f:"Psychological safety meta-analysis confirming its role as enabler."},
                 {c:"An et al. (2025)",s:"PNAS Nexus",st:"Large-scale experiment",f:"AI models systematically disadvantage Black male applicants."},
                 {c:"Wang et al. (2014)",s:"J. of Applied Psychology",st:"42 samples",f:"Shared leadership predicts team effectiveness."},
-                {c:"Kalinoski et al. (2013)",s:"J. of Applied Psychology",st:"65 studies",f:"Active learning outperforms passive diversity training."},
+                {c:"Kalinoski et al. (2013)",s:"J. of Organizational Behavior",st:"65 studies",f:"Active learning outperforms passive diversity training."},
                 {c:"Harter et al. (2002)",s:"J. of Applied Psychology",st:"7,939 units",f:"Engagement predicts profitability and customer satisfaction."},
               ].map((e,i)=>(
                 <FI key={i} delay={i*0.08}><Card style={{ height: "100%" }}>
@@ -1046,9 +1046,9 @@ export default function AILTSite() {
               <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 28, alignItems: "start" }}>
               <img src="/matthew-culwell.jpg" alt="Matthew Culwell" style={{ width: "100%", height: "auto", borderRadius: 14, border: `1px solid ${G}30`, boxShadow: "0 16px 48px rgba(0,0,0,0.5)" }} />
               <div>
-              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory. His doctoral research at Liberty University focused on the intersection of leadership, artificial intelligence, and organizational equity.</p>
+              <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>Matthew Culwell is the creator of Adaptive Inclusive Leadership Theory. He is a doctoral candidate in Strategic Leadership at Liberty University, where his research focuses on the intersection of leadership, artificial intelligence, and organizational equity.</p>
               <p style={{ fontSize: 15, color: T, lineHeight: 1.8, marginBottom: 16 }}>An enrolled Chickasaw citizen, Matthew brings a perspective shaped by both Indigenous community values and modern organizational leadership. AILT emerged from the observation that existing theories treat adaptability and inclusivity as separate capabilities, a gap that becomes critical when algorithms make decisions once exclusively human.</p>
-              <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in a meta-analysis of 105 samples (N = 39,948) and in evidence from over 100,000 participants across the studies cited.</p>
+              <p style={{ fontSize: 15, color: T, lineHeight: 1.8 }}>The framework integrates these capacities with five testable propositions, grounded in Li, Ling, and Zhu's published meta-analysis of 105 samples (N = 39,948) and in evidence from over 100,000 participants across the studies cited.</p>
               <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 18, color: G, fontWeight: 700, fontSize: 13, textDecoration: "none", border: `1px solid ${G}40`, padding: "8px 14px", borderRadius: 8 }}>Matthew Culwell on LinkedIn</a>
               </div>
               </div>
